@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#BBFF36">
+<title>Innovart Festival · San Sebastiano Curone</title>
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="en.html">
+<meta name="description" content="Innovart, festival di arte, artigianato, architettura, cinema e musica a San Sebastiano Curone (AL). Quarta edizione, 23–25 luglio 2027.">
+<script src="js/matter.min.js"></script>
+<style>
+@font-face{font-family:"Satoshi";src:url(fonts/Satoshi-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Satoshi";src:url(fonts/Satoshi-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Satoshi";src:url(fonts/Satoshi-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Satoshi";src:url(fonts/Satoshi-900.woff2) format("woff2");font-weight:900;font-display:swap}
+/* Bricolage Grotesque e Newsreader: SIL Open Font License 1.1, ospitati sul sito (nessuna richiesta a server esterni) */
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/BricolageGrotesque-latin.woff2) format("woff2-variations");font-weight:200 800;font-stretch:75% 100%;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/BricolageGrotesque-latin-ext.woff2) format("woff2-variations");font-weight:200 800;font-stretch:75% 100%;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Newsreader";src:url(fonts/Newsreader-latin.woff2) format("woff2-variations");font-weight:200 800;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Newsreader";src:url(fonts/Newsreader-latin-ext.woff2) format("woff2-variations");font-weight:200 800;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* Innovart: il festival come gioco. Massimalista: tutti i colori di brand insieme, fisica, suono, stanze-gioco.
+   Struttura: hub con blocchi fisici + 7 stanze a tutto schermo; caccia ai 5 segni nascosti. */
+:root{
+  --paper:#F3F3F3; --ink:#000; --festival:#BBFF36; --cinema:#0155FD; --musica:#7903F4;
+  --arte:#FF00FE; --artigianato:#FFB600; --architettura:#FF2B15;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --ui:"Satoshi","Helvetica Neue",Arial,sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+  --b:3px solid var(--ink);
+  --gut:clamp(14px,2.6vw,36px);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--ui);font-size:18px;line-height:1.45;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+img{max-width:100%;display:block}
+.disp{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100,"opsz" 96;letter-spacing:-.015em;line-height:.9}
+
+/* ---------- barra ---------- */
+.bar{position:sticky;top:0;z-index:60;display:flex;align-items:stretch;background:var(--ink);color:var(--paper);height:58px;border-bottom:var(--b)}
+.logo{display:flex;align-items:center;gap:10px;padding:0 var(--gut);text-decoration:none;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:24px;background:var(--festival);color:var(--ink);flex:none}
+.logo svg{width:27px;height:20px}
+.logo sup{font-family:var(--ui);font-size:12px;font-weight:900;background:var(--ink);color:var(--festival);padding:2px 5px;margin-left:2px}
+.rooms{display:flex;overflow-x:auto;scrollbar-width:none;flex:1}
+.rooms::-webkit-scrollbar{display:none}
+.rooms a{flex:none;display:flex;align-items:center;gap:6px;padding:0 11px;text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;border-right:1px solid #333;position:relative;overflow:hidden}
+.rooms a::before{content:"";position:absolute;inset:0;background:var(--c);transform:translateY(101%);transition:transform .3s cubic-bezier(.7,0,.2,1)}
+.rooms a:hover::before,.rooms a[aria-current="page"]::before{transform:none}
+.rooms a > *{position:relative}
+.rooms a:hover,.rooms a[aria-current="page"]{color:var(--tc,#fff)}
+.rooms a svg{width:16px;height:16px;flex:none}
+.hud{display:flex;align-items:center;gap:6px;padding:0 14px;border-left:1px solid #333;flex:none}
+.hud span{font-size:13px;font-weight:700;margin-right:4px}
+.hud i{width:18px;height:18px;border:2px solid #555;display:block;transition:background .3s,transform .3s}
+.hud i.got{background:var(--c);border-color:var(--c);transform:rotate(45deg)}
+.lang{flex:none;display:flex;align-items:center;background:var(--festival);color:var(--ink);padding:0 14px;font-weight:900;font-size:14px;text-decoration:none;border-left:var(--b)}
+.lang:hover{background:var(--paper)}
+@media (max-width:820px){.lang{padding:0 10px;font-size:13px}}
+.snd{flex:none;background:var(--paper);color:var(--ink);border:0;padding:0 16px;font-weight:900;font-size:14px;cursor:pointer}
+.snd[aria-pressed="false"]{background:#333;color:#999;text-decoration:line-through}
+.menu-btn{display:none;flex:1;align-items:center;justify-content:flex-start;gap:10px;background:var(--ink);color:var(--paper);border:0;border-left:1px solid #333;padding:0 14px;font-weight:900;font-size:15px;cursor:pointer}
+.menu-btn i{display:grid;gap:4px}.menu-btn i b{display:block;width:20px;height:3px;background:var(--festival)}
+.menu{position:fixed;inset:0;z-index:110;background:var(--ink);color:var(--paper);display:none;flex-direction:column;overflow:auto}
+.menu.open{display:flex}
+.menu-top{display:flex;justify-content:space-between;align-items:center;height:58px;padding:0 0 0 var(--gut);border-bottom:var(--b);border-color:#333;flex:none}
+.menu-top b{font-weight:900}
+.menu-top button{height:100%;background:var(--festival);color:var(--ink);border:0;padding:0 18px;font-weight:900;font-size:15px;cursor:pointer}
+.menu a{display:flex;align-items:center;gap:16px;padding:16px var(--gut);background:var(--c);color:var(--tc,#fff);text-decoration:none;border-bottom:3px solid var(--ink);flex:none}
+.menu a svg{width:34px;height:34px;flex:none}
+.menu a b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:34px;line-height:1;letter-spacing:0}
+.menu a small{display:block;font-size:14px;font-weight:500;opacity:.9}
+.menu .menu-foot{background:var(--ink);color:var(--paper);font-size:15px;font-weight:700}
+@media (max-width:1499px){.rooms a svg{display:none}.hud span{display:none}}
+@media (max-width:1180px){
+  .rooms{display:none}
+  .menu-btn{display:flex}
+  .hud span{display:none}
+  .logo{font-size:20px;padding:0 12px}
+  .logo .t{display:none}
+}
+
+.only-touch{display:none}
+@media (hover:none) and (pointer:coarse){.only-kb{display:none}.only-touch{display:inline}}
+.ios-note{display:none;flex-basis:100%;font-weight:700;font-size:14px;color:var(--artigianato)}
+.is-ios .ios-note{display:block}
+
+/* ---------- views ---------- */
+.view{display:none;position:relative}
+.view.on{display:block}
+
+/* ---------- HUB ---------- */
+.hub{position:relative;height:calc(100svh - 58px);min-height:520px;overflow:hidden;border-bottom:var(--b);background:var(--paper)}
+#world{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.hub-txt{position:absolute;left:var(--gut);top:18px;right:var(--gut);display:flex;justify-content:space-between;gap:16px;pointer-events:none;z-index:2}
+.hub-txt .k{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(28px,4.6vw,72px);line-height:.9;letter-spacing:-.01em}
+.hub-txt .k b{background:var(--festival);padding:0 .08em}
+.hub-txt p{max-width:30ch;font-family:var(--serif);font-size:clamp(17px,1.6vw,22px);line-height:1.25;text-align:right}
+.hub-ctl{position:absolute;left:var(--gut);bottom:18px;z-index:2;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{background:var(--ink);color:var(--paper);border:var(--b);font-weight:900;font-size:15px;padding:10px 16px;cursor:pointer;box-shadow:5px 5px 0 var(--c,var(--festival));transition:transform .12s,box-shadow .12s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--c,var(--festival))}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--c,var(--festival))}
+.btn.light{background:var(--paper);color:var(--ink)}
+.btn[aria-pressed="true"]{background:var(--festival);color:var(--ink)}
+.hub-hint{position:absolute;right:var(--gut);bottom:22px;z-index:2;font-weight:700;font-size:14px;background:var(--paper);border:2px solid var(--ink);padding:6px 10px;max-width:290px;pointer-events:none}
+.hub-down{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:2;background:var(--ink);color:var(--festival);font-weight:900;font-size:14px;padding:8px 14px;text-decoration:none;border:3px solid var(--ink);border-bottom:0}
+@media (max-width:700px){
+  .hub{height:74svh;min-height:460px}
+  .hub-txt{flex-direction:column;gap:8px;top:12px}
+  .hub-txt .k{font-size:clamp(30px,9vw,44px)}
+  .hub-txt p{text-align:left;font-size:16px;max-width:34ch}
+  .hub-hint{display:none}
+  .hub-ctl{bottom:46px;gap:6px;flex-wrap:nowrap}
+  .hub-ctl .btn{font-size:13px;padding:8px 10px;box-shadow:3px 3px 0 var(--c);white-space:nowrap}
+}
+@media (max-width:820px){.bar .hud{flex:1;justify-content:flex-end;gap:4px;padding:0 10px}.bar .hud i{width:12px;height:12px}.bar .snd{padding:0 12px;font-size:13px}.menu-btn{flex:none}}
+/* cos'è Innovart */
+.intro{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);border-bottom:var(--b);background:var(--paper)}
+.intro p{padding:clamp(26px,4vw,56px) var(--gut);font-family:var(--serif);font-size:clamp(24px,2.6vw,40px);line-height:1.18;border-right:var(--b)}
+.intro p b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100}
+.ig{display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:clamp(22px,3vw,40px) var(--gut);background:var(--arte);color:#fff;text-decoration:none;transition:background .2s}
+.ig:hover{background:var(--musica)}
+.ig small{font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.04em}
+.ig b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(40px,5vw,84px);line-height:.9;letter-spacing:-.01em;word-break:break-word}
+.ig span{font-weight:700;font-size:16px}
+@media (max-width:820px){.intro{grid-template-columns:1fr}.intro p{border-right:0;border-bottom:var(--b)}}
+
+/* stanze come pulsanti */
+.doors{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:var(--b)}
+.door{background:var(--c);color:var(--tc,#fff);text-decoration:none;padding:18px 16px 16px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;border-right:var(--b);position:relative;overflow:hidden}
+.door:last-child{border-right:0}
+.door svg{width:52px;height:52px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.door b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(22px,2vw,36px);line-height:.9;letter-spacing:0;overflow-wrap:anywhere;hyphens:auto}
+.door small{display:block;font-size:14px;font-weight:500;margin-top:6px;opacity:.9}
+.door:hover svg{transform:rotate(180deg) scale(1.3)}
+@media (max-width:1000px){.doors{grid-template-columns:repeat(2,1fr)}.door{border-bottom:var(--b)}.door:nth-child(2n){border-right:0}.door:last-child{grid-column:1/-1}}
+
+/* striscia foto con skew da scroll */
+.strip{overflow:hidden;border-bottom:var(--b);background:var(--ink);padding:18px 0}
+.strip-track{display:flex;gap:18px;width:max-content;will-change:transform}
+.strip-track figure{width:clamp(220px,28vw,420px);aspect-ratio:3/2;border:3px solid var(--paper);flex:none;position:relative;overflow:hidden}
+.strip-track img{width:100%;height:100%;object-fit:cover;filter:contrast(1.1)}
+.strip-track figure::after{content:"";position:absolute;inset:0;background:var(--c);mix-blend-mode:multiply;opacity:.75;transition:opacity .3s}
+.strip-track figure:hover::after{opacity:0}
+
+.mega-marq{overflow:hidden;border-bottom:var(--b);background:var(--festival)}
+.mega-marq div{display:flex;width:max-content;animation:mq 22s linear infinite}
+.mega-marq span{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100,"opsz" 96;font-size:clamp(80px,14vw,220px);line-height:.95;letter-spacing:-.015em;white-space:nowrap;padding-right:.3em}
+.mega-marq span:nth-child(odd){-webkit-text-stroke:3px var(--ink);color:transparent}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:var(--b)}
+.stats div{padding:28px var(--gut);border-right:var(--b);background:var(--c);color:var(--tc,#fff)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(80px,11vw,180px);line-height:.9;letter-spacing:-.015em}
+@media (max-width:700px){.stats{grid-template-columns:1fr}.stats div{border-right:0;border-bottom:var(--b)}}
+
+/* ---------- STANZE ---------- */
+.room{background:var(--c);color:var(--tc,#fff);min-height:calc(100svh - 58px);position:relative;overflow:hidden}
+.room-head{padding:clamp(24px,4vw,56px) var(--gut) clamp(20px,3vw,40px);border-bottom:var(--b);position:relative}
+.room-head .tag{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);font-weight:900;font-size:14px;padding:6px 12px 6px 8px}
+.room-head .tag svg{width:22px;height:22px;flex:none;color:var(--c)}
+.room-head h1{font-size:clamp(56px,17vw,300px);margin-top:18px}
+.room-head p{font-family:var(--serif);font-size:clamp(20px,2vw,28px);line-height:1.25;max-width:36ch;margin-top:18px}
+.room-head .bigico{position:absolute;right:var(--gut);top:clamp(20px,4vw,50px);width:clamp(120px,22vw,340px);opacity:.25;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.game{border-bottom:var(--b);position:relative;background:var(--paper);color:var(--ink)}
+.game-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px var(--gut);border-bottom:var(--b);background:var(--ink);color:var(--paper)}
+.game-bar h2{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(24px,2.6vw,38px);line-height:1}
+.game-bar .meter{font-weight:900;font-size:16px;background:var(--c);color:var(--tc,#fff);padding:6px 12px;font-variant-numeric:tabular-nums}
+.game-bar .ctl{display:flex;gap:8px;flex-wrap:wrap}
+.game-bar .btn{box-shadow:4px 4px 0 var(--c);border-color:var(--paper);padding:8px 14px;font-size:14px}
+.txt{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut);padding:clamp(28px,4vw,60px) var(--gut);border-bottom:var(--b)}
+.txt h2{grid-column:1/6;font-size:clamp(44px,6vw,100px)}
+.txt .p{grid-column:7/13;font-family:var(--serif);font-size:clamp(19px,1.6vw,23px);line-height:1.4}
+.txt .p p+p{margin-top:.8em}
+@media (max-width:760px){.txt h2,.txt .p{grid-column:1/-1}}
+.list{list-style:none;grid-column:7/13;border-top:3px solid currentColor}
+.list li{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:12px 0;border-bottom:1px solid currentColor}
+.list li b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(32px,4vw,64px);line-height:.95;letter-spacing:0}
+.list li span{font-weight:700;font-size:14px}
+.artists li span{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
+.artists li span em{font-style:normal;white-space:nowrap}.artists li span i{font-family:var(--serif);font-size:18px;font-weight:400}
+.artists a{color:inherit;text-decoration:underline;text-underline-offset:3px;word-break:break-all}
+@media (max-width:560px){.artists li{flex-direction:column;align-items:flex-start;gap:6px}.artists li span{align-items:flex-start;text-align:left}}
+@media (max-width:760px){.list{grid-column:1/-1}}
+
+.pics{display:grid;grid-template-columns:repeat(var(--n,3),1fr);border-bottom:var(--b)}
+.pics figure{position:relative;border-right:var(--b);overflow:hidden;height:clamp(260px,40vw,600px);background:var(--ink)}
+.pics figure:last-child{border-right:0}
+.pics img{width:100%;height:100%;object-fit:cover}
+.pics.market figure{height:clamp(220px,26vw,420px)}
+@media (max-width:700px){.pics.market{grid-template-columns:1fr 1fr}.pics.market figure{aspect-ratio:1/1;height:auto}.pics.market figure:nth-child(2n){border-right:0}}
+.pics figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-weight:700;font-size:13px;padding:5px 10px}
+.tilt{transition:transform .25s ease-out;transform-style:preserve-3d}
+@media (max-width:700px){.pics{grid-template-columns:1fr}.pics figure{border-right:0;border-bottom:var(--b);height:auto;aspect-ratio:4/3}}
+
+/* segni nascosti */
+.seg{position:absolute;z-index:20;width:46px;height:46px;border:0;background:var(--ink);color:var(--c);display:grid;place-items:center;cursor:pointer;animation:wig 2.4s ease-in-out infinite;box-shadow:4px 4px 0 var(--paper)}
+.seg svg{width:28px;height:28px}
+.seg:hover{animation-duration:.4s}
+.seg.got{display:none}
+@keyframes wig{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.12)}}
+
+/* ARTE: generatore */
+#paint{display:block;width:100%;height:clamp(400px,68vh,720px);touch-action:none;cursor:crosshair}
+#paint:focus-visible{outline:4px solid var(--festival);outline-offset:-4px}
+.paint-hint{margin:0;padding:10px var(--gut);background:var(--ink);color:var(--paper);font-size:14px;border-top:3px solid #333}
+@media (max-width:700px){#paint{height:min(56vh,460px);min-height:320px}}
+.shot .ctl{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.shot{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.8);display:none;place-items:center;padding:16px}
+.shot.show{display:grid}
+.shot > div{background:var(--paper);border:4px solid var(--ink);padding:14px;max-width:min(900px,100%);box-shadow:12px 12px 0 var(--arte)}
+.shot img{max-height:62vh;width:auto;margin:0 auto 12px;border:3px solid var(--ink)}
+.shot p{font-weight:700;margin-bottom:10px}
+/* ARCHITETTURA: mappa */
+#offcv{display:block;width:100%;height:clamp(380px,62vh,620px);touch-action:manipulation;-webkit-tap-highlight-color:transparent;outline:none;background:var(--paper)}
+#offcv:focus-visible{box-shadow:inset 0 0 0 4px var(--festival)}
+.offbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:12px var(--gut);border-top:var(--b);background:var(--ink);color:var(--paper)}
+.offbar .hint{font-weight:700;font-size:14px;color:var(--architettura);flex:1 1 320px}
+.offbar .hint.off{display:none}
+.offbar .verdict{font-weight:900;font-size:16px;color:var(--festival);flex:1 1 320px}
+.offbar .verdict:empty{display:none}
+@media (max-width:700px){#offcv{height:auto;aspect-ratio:1/1;max-height:78vh}}
+.txt .p a{color:inherit}
+.awards li b{font-size:clamp(26px,3vw,46px)}
+.mentions{grid-column:7/13;margin-top:6px}
+.mentions small{display:block;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.mentions p{font-family:var(--serif);font-size:clamp(18px,1.6vw,22px);line-height:1.35}
+@media (max-width:760px){.mentions{grid-column:1/-1}}
+
+/* box line-up / candidature */
+.soon{display:grid;grid-template-columns:1.3fr 1fr;border-top:var(--b);border-bottom:var(--b);background:var(--festival);color:var(--ink)}
+.soon-big{padding:clamp(28px,4vw,64px) var(--gut);display:flex;flex-direction:column;gap:10px;border-right:var(--b)}
+.soon-big small{font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.soon-big b{font-size:clamp(56px,10vw,170px);line-height:.9;letter-spacing:-.01em}
+.soon-info{padding:clamp(28px,4vw,64px) var(--gut);display:flex;flex-direction:column;gap:16px;justify-content:center;font-family:var(--serif);font-size:clamp(19px,1.6vw,23px);line-height:1.35}
+.soon-info b{font-family:var(--display);font-size:clamp(28px,3vw,44px);line-height:1}
+.soon-info .ctl{font-family:var(--ui,inherit)}
+.chips[hidden],.days[hidden]{display:none}
+@media (max-width:820px){.soon{grid-template-columns:1fr}.soon-big{border-right:0;border-bottom:var(--b)}}
+.callout{display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--b);background:var(--ink);color:var(--paper)}
+.callout > div{padding:clamp(24px,3.5vw,48px) var(--gut);display:flex;flex-direction:column;gap:12px}
+.callout > div + div{border-left:3px solid #333}
+.callout small{font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--festival)}
+.callout b{font-size:clamp(44px,6vw,96px)}
+.callout p{font-family:var(--serif);font-size:clamp(18px,1.6vw,22px);line-height:1.3;max-width:40ch}
+.callout .ctl{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+@media (max-width:760px){.callout{grid-template-columns:1fr}.callout > div + div{border-left:0;border-top:3px solid #333}}
+
+/* MUSICA: pad */
+.pads{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.pad{aspect-ratio:1.5/1;border:0;border-right:var(--b);border-bottom:var(--b);background:#DCDCDC;box-shadow:inset 0 0 0 3px #fff;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:14px;font-weight:900;text-align:left;transition:background .08s}
+.pad:nth-child(4n){border-right:0}
+.pad b{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(26px,3.4vw,54px);line-height:.9;letter-spacing:0}
+.pad kbd{font-family:var(--ui);font-size:13px;border:2px solid currentColor;padding:1px 7px}
+.pad.hit{background:var(--hc);color:#fff;transform:scale(.97);box-shadow:inset 0 0 0 3px #fff}
+@media (max-width:700px){.pads{grid-template-columns:repeat(2,1fr)}.pad:nth-child(2n){border-right:0}.pad:nth-child(4n){border-right:0}.pad{aspect-ratio:1.2/1}.pad kbd{display:none}}
+.beat{animation:beat .18s ease-out}
+@keyframes beat{0%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+/* CINEMA: torcia */
+.projector{position:relative;height:clamp(360px,70vh,760px);overflow:hidden;background:#000;cursor:none}
+.projector img{width:100%;height:100%;object-fit:cover}
+.projector .dark{position:absolute;inset:0;background:#000;--x:50%;--y:50%;--r:150px;
+  -webkit-mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 55%,#000 100%);
+  mask-image:radial-gradient(circle var(--r) at var(--x) var(--y),transparent 0,transparent 55%,#000 100%)}
+.projector .grain{position:absolute;inset:-50%;pointer-events:none;opacity:.22;mix-blend-mode:screen;animation:grain .5s steps(4) infinite}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-4%)}75%{transform:translate(-1%,3%)}}
+.projector .label{position:absolute;left:var(--gut);bottom:18px;background:var(--cinema);color:#fff;font-weight:900;padding:6px 12px;font-size:14px}
+.projector .tabs{position:absolute;right:var(--gut);bottom:14px;display:flex;gap:8px}
+.num700wrap{position:relative;display:flex;align-items:flex-end;flex-wrap:wrap;gap:0 var(--gut);padding:0 var(--gut) clamp(18px,3vw,44px);border-bottom:var(--b)}
+.num700{display:block;font-size:clamp(160px,38vw,640px);font-variant-numeric:tabular-nums}
+.num700wrap > span{font-family:var(--serif);font-size:clamp(22px,2.4vw,38px);line-height:1.15;max-width:16ch;padding-bottom:.4em}
+
+/* ARCHITETTURA: costruttore */
+
+
+.swatches{display:flex;gap:6px}
+.swatches button{width:32px;height:32px;border:3px solid var(--paper);background:var(--s);cursor:pointer}
+.swatches button[aria-pressed="true"]{outline:3px solid var(--festival);outline-offset:2px}
+
+/* ARTIGIANATO: tornio */
+#lathe{display:block;width:100%;height:clamp(400px,66vh,680px);touch-action:pan-y;cursor:ew-resize;background:#1a1410;outline:none;-webkit-tap-highlight-color:transparent}
+#lathe:focus-visible{box-shadow:inset 0 0 0 4px var(--festival)}
+.order{display:flex;align-items:center;gap:10px;font-weight:900}
+.order b{background:var(--artigianato);color:var(--ink);padding:4px 10px;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:24px;line-height:1}
+.tbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px var(--gut);border-top:var(--b);background:var(--ink);color:var(--paper)}
+.tbar .hint{font-weight:700;font-size:14px;color:var(--artigianato)}
+.tbar .swatches button{width:36px;height:36px}
+.tshelf{display:grid;grid-template-columns:repeat(6,1fr);border-top:var(--b);background:#C9A27A;min-height:120px}
+.tshelf figure{border-right:var(--b);padding:10px 8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px}
+.tshelf figure:last-child{border-right:0}
+.tshelf svg{width:72%;max-width:110px;height:auto;overflow:visible}
+.tshelf figcaption{font-weight:900;font-size:13px}
+.tshelf p{grid-column:1/-1;align-self:center;padding:0 var(--gut);font-weight:700}
+@media (max-width:760px){#lathe{height:auto;aspect-ratio:4/5;max-height:80vh}.tshelf{grid-template-columns:repeat(3,1fr)}.tshelf figure:nth-child(3n){border-right:0}.tshelf figure:nth-child(-n+3){border-bottom:var(--b)}.tbar .swatches button{width:40px;height:40px}}
+
+/* PROGRAMMA */
+.days{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);padding:var(--gut);perspective:1000px}
+.day{background:var(--paper);color:var(--ink);border:var(--b);box-shadow:10px 10px 0 var(--ink)}
+.day-h{display:flex;justify-content:space-between;align-items:flex-end;padding:16px 18px;border-bottom:var(--b);background:var(--festival)}
+.day-h b{font-size:clamp(80px,9vw,150px)}
+.day-h span{font-weight:900;font-size:20px}
+.slot{display:grid;grid-template-columns:10px 1fr;gap:12px;padding:12px 18px;border-bottom:1px solid var(--ink);transition:opacity .25s,transform .25s}
+.slot:last-child{border-bottom:0}
+.slot::before{content:"";background:var(--c)}
+.slot small{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;opacity:.6}
+.slot strong{display:block;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:21px;line-height:1.05}
+.slot.dim{opacity:.12;transform:scale(.96)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:var(--gut) var(--gut) 0}
+.chips .btn{--c:var(--cc)}
+@media (max-width:900px){.days{grid-template-columns:1fr}}
+
+/* INFO */
+.mail{display:block;overflow:hidden;border-bottom:var(--b);text-decoration:none}
+.mail div{display:flex;width:max-content;animation:mq 18s linear infinite}
+.mail:nth-child(even) div{animation-direction:reverse}
+.mail span{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(48px,8vw,130px);line-height:1;letter-spacing:-.01em;padding:8px .4em 8px 0;white-space:nowrap}
+.mail:hover{background:var(--ink);color:var(--festival)}
+.radar{width:min(70vw,340px);aspect-ratio:1;border-radius:50%;border:3px solid currentColor;position:relative;background:repeating-radial-gradient(circle,transparent 0 28px,rgba(0,0,0,.25) 29px 30px)}
+.radar::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,var(--festival),transparent 25%);animation:spin 3s linear infinite}
+.radar::after{content:"";position:absolute;width:16px;height:16px;background:var(--arte);left:56%;top:40%;box-shadow:0 0 0 6px rgba(255,0,254,.3)}
+.partners{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:var(--b)}
+.partners div{padding:18px var(--gut);border-right:var(--b);border-bottom:var(--b);font-weight:900;font-size:17px;min-height:100px;display:flex;align-items:flex-end;background:var(--paper);color:var(--ink);transition:background .2s}
+.partners div:nth-child(3n){border-right:0}
+.partners div:hover{background:var(--festival)}
+@media (max-width:700px){.partners{grid-template-columns:1fr}.partners div{border-right:0}}
+
+footer{background:var(--ink);color:var(--paper);padding:28px var(--gut) 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:flex-end}
+footer a{color:var(--festival)}
+.legal{background:var(--paper);color:var(--ink);padding:clamp(24px,4vw,56px) var(--gut);display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.legal section{grid-column:1/9;border-top:var(--b);padding:18px 0 8px}
+.legal h2{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 100;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:0;margin-bottom:12px}
+.legal p,.legal li{font-size:17px;line-height:1.5;max-width:70ch}
+.legal p+p{margin-top:.7em}
+.legal ul{padding-left:1.2em;margin:.5em 0}
+.legal a{color:inherit}
+.todo{background:var(--artigianato);color:#000;padding:0 .2em;font-weight:700}
+@media (max-width:900px){.legal section{grid-column:1/-1}}
+footer b{font-size:clamp(60px,10vw,160px);color:var(--festival)}
+footer p{font-size:15px}
+
+/* ---------- transizione a pixel ---------- */
+.pix{position:fixed;inset:0;z-index:100;display:grid;pointer-events:none}
+.pix i{display:block;transform:scale(0);transition:transform .32s cubic-bezier(.7,0,.2,1)}
+.pix.in i{transform:scale(1.02)}
+#fx{position:fixed;inset:0;z-index:90;pointer-events:none;width:100%;height:100%}
+
+/* toast e pass */
+.toast{position:fixed;left:50%;bottom:24px;z-index:110;transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:var(--ink);color:var(--paper);border:3px solid var(--festival);padding:12px 18px;font-weight:900;font-size:16px;transition:transform .35s cubic-bezier(.2,.8,.2,1);max-width:calc(100vw - 32px)}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+.pass{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.7);display:none;place-items:center;padding:16px}
+.pass.show{display:grid}
+.ticket{background:var(--festival);color:var(--ink);border:4px solid var(--ink);width:min(560px,100%);box-shadow:14px 14px 0 var(--arte);animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.4) rotate(-12deg)}}
+.ticket .t1{padding:22px;border-bottom:4px dashed var(--ink)}
+.ticket .t1 b{font-size:clamp(56px,12vw,96px);display:block}
+.ticket .t2{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:4px solid var(--ink)}
+.ticket .t2 i{aspect-ratio:1;display:grid;place-items:center;background:var(--c);color:var(--tc,#fff);border-right:4px solid var(--ink)}
+.ticket .t2 i:last-child{border-right:0}
+.ticket .t2 svg{width:56%;height:56%}
+.ticket .t3{padding:18px 22px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.ticket p{font-family:var(--serif);font-size:20px;margin-top:10px}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important}
+  .pix i,.tilt,.toast{transition:none}
+}
+/* barra su telefoni stretti: ci sta anche il pulsante lingua */
+@media (max-width:440px){.bar .hud #hudN{display:none}.bar .hud{padding:0 8px;gap:3px}.bar .hud i{width:10px;height:10px}.menu-btn{padding:0 10px;gap:8px}.lang{padding:0 9px}.bar .snd{padding:0 9px;font-size:12px}}
+@media (max-width:400px){.logo sup{display:none}}
+@media (max-width:350px){.menu-btn{font-size:0;gap:0}.logo{padding:0 12px}}
+</style>
+</head>
+<body>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="pix" id="pix" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<header class="bar">
+  <a class="logo" href="#home" aria-label="Innovart, home"><svg viewBox="-2 -2 271 204" aria-hidden="true"><path fill="currentColor" d="M 12.5 88.8 C 6.8 83.2 0.0 86.0 0.0 92.7 L 0.0 195.4 L 56.2 195.4 C 64.1 195.4 69.9 187.7 67.5 180.1 C 57.3 146.8 37.9 116.5 12.5 88.8 M 254.8 0.0 L 36.8 0.0 C 29.0 0.0 23.3 7.4 25.3 14.9 C 42.5 79.2 78.6 137.2 126.9 190.1 C 126.9 190.1 126.9 190.1 127.0 190.1 C 137.2 200.0 149.3 195.1 149.3 183.1 L 149.3 35.8 C 168.2 91.8 201.6 143.0 244.6 190.1 C 254.9 200.0 267.0 195.1 267.0 183.1 L 267.0 12.2 C 267.0 5.5 261.5 0.0 254.8 0.0"/></svg><span class="t">INNOVART</span></a>
+  <nav class="rooms" id="rooms" aria-label="Stanze"></nav>
+  <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"><b></b><b></b><b></b></i>Stanze</button>
+  <div class="hud" id="hud" title="Segni trovati"><span id="hudN">0/5 segni</span></div>
+  <a class="lang" id="lang" href="en.html" hreflang="en" lang="en" aria-label="English version">EN</a>
+  <button class="snd" id="snd" type="button" aria-pressed="true">AUDIO</button>
+</header>
+
+<nav class="menu" id="menu" aria-label="Stanze">
+  <div class="menu-top"><b>Stanze</b><button type="button" id="menuClose">Chiudi</button></div>
+  <div id="menuList" style="display:contents"></div>
+  <a class="menu-foot" href="#privacy">Privacy e note legali</a>
+</nav>
+
+<main>
+
+<!-- ======== HUB ======== -->
+<section class="view" id="v-home">
+  <div class="hub">
+    <canvas id="world" aria-label="Campo di gioco: blocchi con le lettere di Innovart, i segni delle sezioni e alcune foto da trascinare e lanciare. Le stanze del festival sono più in basso nella pagina."></canvas>
+    <div class="hub-txt">
+      <div class="k">Quarta edizione<br><b>23–25.07.2027</b><br>San Sebastiano Curone</div>
+      <p>Il festival è un paese da esplorare. Lancia i blocchi, poi scendi: sotto ci sono le stanze e 5 segni nascosti da trovare.</p>
+    </div>
+    <div class="hub-ctl">
+      <button class="btn" type="button" id="shake" style="--c:var(--arte)">Scuoti il borgo</button>
+      <button class="btn light" type="button" id="zerog" aria-pressed="false" style="--c:var(--cinema)">Gravità zero</button>
+      <button class="btn light" type="button" id="reset" style="--c:var(--artigianato)">Rimetti in ordine</button>
+    </div>
+    <div class="hub-hint">Trascina e lancia i blocchi. Toccane uno per farlo saltare.</div>
+    <a class="hub-down" href="#intro" id="hubDown">Scendi ↓</a>
+  </div>
+
+  <div class="mega-marq" aria-hidden="true"><div id="mm"></div></div>
+  <div class="intro" id="intro">
+    <p><b>Innovart</b> è il festival che ogni luglio trasforma il borgo di San Sebastiano Curone, in Val Curone: tre giorni di arte, artigianato, architettura, cinema e musica tra vicoli, piazze e cortili. Ingresso libero.</p>
+    <a class="ig" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer"><small>Seguici su Instagram</small><b>@innovartfest</b><span>Programma, call e novità del 2027 escono prima lì. Apri il profilo →</span></a>
+  </div>
+  <nav class="doors" id="doors" aria-label="Tutte le stanze"></nav>
+
+  <div class="strip" aria-label="Foto da Innovart 2026"><div class="strip-track" id="strip"></div></div>
+
+  <div class="stats">
+    <div style="--c:var(--cinema)"><b class="count" data-n="700">700</b>corti proposti nel 2026</div>
+    <div style="--c:var(--architettura)"><b class="count" data-n="4">4</b>padiglioni autocostruiti</div>
+    <div style="--c:var(--festival);--tc:#000"><b>4ª</b>edizione nel 2027</div>
+  </div>
+</section>
+
+<!-- ======== MUSICA ======== -->
+<section class="view" id="v-musica">
+  <div class="room" style="--c:var(--musica)">
+    <div class="room-head">
+      <span class="tag" data-ico="musica">Stanza musica</span>
+      <svg class="bigico ico" data-ico="musica" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <h1 class="disp scr">Musica</h1>
+      <p>Ogni sera Piazza Marconi diventa palco. Qui il palco sei tu: suona i pad<span class="only-kb"> con il mouse o con i tasti da 1 a 8</span><span class="only-touch"> con le dita</span>.</p>
+    </div>
+    <div class="game" id="musicGame">
+      <div class="game-bar"><h2>Drum machine di piazza</h2><div class="ctl"><button class="btn" type="button" id="loop">Avvia il beat</button></div><span class="meter" id="hits">0 colpi</span><p class="ios-note">Niente suono? Togli il silenzioso dal tasto laterale dell'iPhone.</p></div>
+      <div class="pads" id="pads"></div>
+    </div>
+    <div class="pics" style="--n:3" id="musicPics">
+      <figure class="tilt"><img src="img/musica-live-1.jpg" alt="Incubo sul palco con le braccia alzate" loading="lazy"><figcaption>Incubo, 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/musica26-palco.jpg" alt="Principe in concerto sul palco di Piazza Marconi illuminato di blu" loading="lazy"><figcaption>Principe, Piazza Marconi 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/musica26-folla.jpg" alt="Sesto in concerto, con il pubblico sotto il palco" loading="lazy"><figcaption>Sesto, 2026</figcaption></figure>
+    </div>
+    <div class="txt"><h2 class="disp">Sul palco nel 2026</h2>
+      <ul class="list"><li><b>Frenkie</b><span></span></li><li><b>Sesto</b><span></span></li><li><b>Principe</b><span>Semifinalista Sanremo Giovani 2025</span></li><li><b>Incubo x Hara</b><span></span></li></ul>
+    </div>
+    <div class="callout">
+      <div><small>2027</small><b class="disp">Line-up in arrivo</b><p>I nomi della quarta edizione escono prima su Instagram.</p></div>
+      <div><small>Vuoi suonare a Innovart?</small><p>Mandaci una mail con qualche brano e due righe su di te, o scrivici in DM.</p>
+        <div class="ctl"><a class="btn light" href="mailto:info@innovevent.eu?subject=Candidatura%20musica%20Innovart%202027" style="--c:var(--festival)">Scrivi a info@innovevent.eu</a><a class="btn" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer" style="--c:var(--arte)">DM a @innovartfest</a></div></div>
+    </div>
+    <button class="seg" type="button" data-seg="musica" style="left:78%;top:62%" aria-label="Segno nascosto della musica"></button>
+  </div>
+</section>
+
+<!-- ======== CINEMA ======== -->
+<section class="view" id="v-cinema">
+  <div class="room" style="--c:var(--cinema)">
+    <div class="room-head">
+      <span class="tag" data-ico="cinema">Stanza cinema</span>
+      <svg class="bigico ico" data-ico="cinema" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <h1 class="disp scr">Cinema</h1>
+      <p>Concorso internazionale di cortometraggi per giovani registi, proiettati all'aperto nelle sere del festival.</p>
+    </div>
+    <div class="game">
+      <div class="game-bar"><h2>Accendi il proiettore</h2><div class="ctl"><button class="btn" type="button" data-film="cinema-schermo">Schermo</button><button class="btn" type="button" data-film="cinema-pubblico">Pubblico</button></div><span class="meter"><span class="only-kb">Muovi la luce sulla scena</span><span class="only-touch">Tocca dove vuoi la luce</span></span></div>
+      <div class="projector" id="projector">
+        <img id="filmImg" src="img/cinema-schermo.jpg" alt="Uno schermo all'aperto con un primo piano di due donne, il pubblico in silhouette">
+        <div class="dark"></div>
+        <div class="grain" id="grain"></div>
+        <span class="label">Innovart Film Festival 2024 · foto Alice Fois</span>
+      </div>
+    </div>
+    <div class="num700wrap"><b class="disp num700" id="num700">700</b><span>corti arrivati da tutto il mondo nel 2026</span>
+      <button class="seg" type="button" data-seg="cinema" style="right:var(--gut);top:24px" aria-label="Segno nascosto del cinema"></button></div>
+    <div class="txt"><h2 class="disp">Tre serate di proiezioni</h2>
+      <div class="p"><p>Circa settecento corti arrivati da tutto il mondo nel 2026. Dal 23 al 25 luglio 2027 la selezione ufficiale torna in piazza; la domenica sera la giuria assegna i premi.</p><p><b>Il premio non è in denaro:</b> chi vince riceve un oggetto artigianale unico, fatto apposta per il festival.</p><p>Iscrizioni su <a href="https://filmfreeway.com/INNOVARTFilmFestival" target="_blank" rel="noopener noreferrer">FilmFreeway</a>. Contatti: <a href="mailto:cinema@innovevent.eu">cinema@innovevent.eu</a></p></div>
+    </div>
+    <div class="txt"><h2 class="disp">Premiati 2026</h2>
+      <ul class="list awards">
+        <li><b>Falliti</b><span>Miglior regia</span></li>
+        <li><b>Father and Son</b><span>Miglior documentario</span></li>
+        <li><b>George</b><span>Miglior fotografia</span></li>
+        <li><b>¡Hola!</b><span>Miglior montaggio</span></li>
+        <li><b>First Kiss</b><span>Miglior suono</span></li>
+        <li><b>Railbound</b><span>Miglior film con IA</span></li>
+        <li><b>Revelations</b><span>Miglior color grading</span></li>
+        <li><b>Shopping Like a Millionaire</b><span>Miglior videoclip</span></li>
+      </ul>
+      <div class="mentions"><small>Menzioni d'onore</small><p>Servants of God · Unbound · Santa Maria · Ocean Voices: Edge of Defense · Rutinas · The Price They Pay</p></div>
+    </div>
+    <div class="callout">
+      <div><small>Call 2027</small><b class="disp">Iscrivi il tuo corto</b><p>Date e regolamento della quarta edizione escono su FilmFreeway e su Instagram.</p></div>
+      <div><small>Domande sul concorso?</small><p>Scrivici: rispondiamo a registi, produzioni e distributori.</p>
+        <div class="ctl"><a class="btn light" href="https://filmfreeway.com/INNOVARTFilmFestival" target="_blank" rel="noopener noreferrer" style="--c:var(--festival)">Pagina FilmFreeway</a><a class="btn" href="mailto:cinema@innovevent.eu?subject=Concorso%20cortometraggi%20Innovart%202027" style="--c:var(--cinema)">Scrivi a cinema@innovevent.eu</a><a class="btn" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer" style="--c:var(--arte)">@innovartfest</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ARCHITETTURA ======== -->
+<section class="view" id="v-architettura">
+  <div class="room" style="--c:var(--architettura)">
+    <div class="room-head">
+      <span class="tag" data-ico="architettura">Stanza architettura</span>
+      <svg class="bigico ico" data-ico="architettura" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <h1 class="disp scr">OFF</h1>
+      <p>OFF è il concorso di autocostruzione di Innovart: squadre di studenti di architettura progettano e costruiscono con le proprie mani padiglioni temporanei nei siti del borgo. Qui provi a tirarne su uno tu, e a farlo restare in piedi.</p>
+    </div>
+    <div class="game">
+      <div class="game-bar"><h2>Tira su il padiglione</h2>
+        <div class="ctl"><button class="btn" type="button" id="oWind" style="--c:var(--cinema)">Arriva il vento</button><button class="btn" type="button" id="oUndo">Annulla</button><button class="btn" type="button" id="oClear">Pulisci</button><button class="btn light" type="button" id="oExample">Esempio</button></div>
+        <span class="meter" id="oMeter">0 listelli · tetto 0/3</span></div>
+      <canvas id="offcv" tabindex="0" aria-label="Cantiere: una griglia di nodi su cui costruire un padiglione di listelli. Tocca un nodo e poi uno vicino per mettere o togliere un listello, poi premi Arriva il vento. Da tastiera: frecce per scegliere il nodo, Invio per agganciare, V per il vento."></canvas>
+      <div class="offbar"><p class="hint" id="oHint">Tocca un nodo, poi uno vicino: ci metti un listello (ritocca per toglierlo). Arriva fino alla riga del tetto, poi premi "Arriva il vento".<span class="only-kb"> Da tastiera: frecce, Invio, V.</span></p><p class="verdict" id="oVerdict" aria-live="polite"></p></div>
+      <p id="oLive" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+    </div>
+    <div class="pics" style="--n:3">
+      <figure class="tilt"><img src="img/off26-telaio.jpg" alt="Studenti montano un telaio di legno in una via del borgo" loading="lazy"><figcaption>Cantiere OFF 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/off26-dal-basso.jpg" alt="Un padiglione di legno visto dal basso con fili rossi tesi" loading="lazy"><figcaption>Padiglione, 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/off26-padiglione.jpg" alt="Un padiglione di legno con copertura in tela in una piazzetta" loading="lazy"><figcaption>Padiglione, 2026</figcaption></figure>
+    </div>
+    <div class="txt"><h2 class="disp">Il bando 2027</h2>
+      <div class="p"><p>Esce in primavera e circola nelle scuole di architettura. Criteri: sperimentazione, sostenibilità dei materiali, valorizzazione del territorio. Le squadre selezionate costruiscono in paese nei giorni prima del festival.</p><p>Contatti: <a href="mailto:architettura@innovevent.eu">architettura@innovevent.eu</a></p></div>
+    </div>
+    <div class="callout" style="position:relative">
+      <div><small>Bando OFF 2027</small><b class="disp">Esce in primavera</b><p>Circola nelle scuole di architettura e su Instagram. Se studi architettura e vuoi costruire a Innovart, tieniti pronto.</p></div>
+      <div><small>Domande sul bando?</small><p>Scrivici: rispondiamo a studenti, squadre e docenti.</p>
+        <div class="ctl"><a class="btn light" href="mailto:architettura@innovevent.eu?subject=Bando%20OFF%20Innovart%202027" style="--c:var(--festival)">Scrivi a architettura@innovevent.eu</a><a class="btn" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer" style="--c:var(--architettura)">@innovartfest</a></div></div>
+      <button class="seg" type="button" data-seg="architettura" style="right:var(--gut);top:20px" aria-label="Segno nascosto dell'architettura"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ARTE ======== -->
+<section class="view" id="v-arte">
+  <div class="room" style="--c:var(--arte)">
+    <div class="room-head">
+      <span class="tag" data-ico="arte">Stanza arte</span>
+      <svg class="bigico ico" data-ico="arte" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <h1 class="disp scr">Arte</h1>
+      <p>A ogni edizione un'opera pensata per il borgo, che per tre giorni abita vicoli, piazze o chiese. Qui generi la tua opera con i segni di Innovart:<span class="only-kb"> trascina il mouse sulla tela, o usa la barra spaziatrice</span><span class="only-touch"> trascina il dito sulla tela</span>.</p>
+    </div>
+    <div class="game">
+      <div class="game-bar"><h2>Generatore di segni</h2>
+        <div class="ctl">
+          <button class="btn" type="button" id="gSym" aria-pressed="false">Simmetria</button>
+          <button class="btn" type="button" id="gGrid" aria-pressed="false">Griglia</button>
+          <button class="btn" type="button" id="gBg">Sfondo: carta</button>
+          <button class="btn" type="button" id="gClear">Pulisci</button>
+          <button class="btn" type="button" id="gSave" style="--c:var(--festival)">Salva l'opera</button>
+        </div><span class="meter" id="gCount">0 segni</span></div>
+      <canvas id="paint" tabindex="0" aria-label="Tela: trascina per generare composizioni con i segni di Innovart. Da tastiera: barra spaziatrice per aggiungere segni."></canvas>
+      <p class="paint-hint"><span class="only-touch">Si disegna solo dentro la tela: per scorrere la pagina tocca fuori.</span><span class="only-kb">Simmetria ripete ogni segno in quattro. Griglia li allinea. Salva l'opera per scaricarla.</span></p>
+    </div>
+    <div class="pics" style="--n:2">
+      <figure class="tilt"><img src="img/arte26-scultura.jpg" alt="Una scultura bianca e nera dalle forme allungate" loading="lazy"><figcaption>Scultura, 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/arte-installazione-1.jpg" alt="Grandi forme vegetali sospese nella navata di una chiesa del borgo: Respiri di luce di Monica Paulon" loading="lazy"><figcaption>Monica Paulon, Respiri di luce, 2024</figcaption></figure>
+    </div>
+    <div class="txt"><h2 class="disp">Gli artisti</h2>
+      <ul class="list artists">
+        <li><b>Anca Adina Bettega</b><span><em><i>Anatomia di una luce</i> · 2026</em><a href="https://www.instagram.com/anidaage/" target="_blank" rel="noopener noreferrer">@anidaage</a></span></li>
+        <li><b>Giacomo Zornetta</b><span><em><i>I fantasmi</i> · 2025</em><a href="https://www.instagram.com/giacomo.zornetta/" target="_blank" rel="noopener noreferrer">@giacomo.zornetta</a></span></li>
+        <li><b>Monica Paulon</b><span><em><i>Respiri di luce</i> · 2024</em><a href="https://www.instagram.com/monicapaulon_organic_fiberart/" target="_blank" rel="noopener noreferrer">@monicapaulon_organic_fiberart</a></span></li>
+      </ul>
+    </div>
+    <div class="callout" style="position:relative">
+      <div><small>Bando arte 2027</small><b class="disp">In arrivo</b><p>Bando, regolamento e materiali di presentazione escono su Instagram @innovartfest. L'opera selezionata abita il borgo per i tre giorni del festival.</p></div>
+      <div><small>Domande sul bando?</small><p>Scrivici: rispondiamo ad artisti e collettivi.</p>
+        <div class="ctl"><a class="btn light" href="mailto:info@innovevent.eu?subject=Bando%20arte%20Innovart%202027" style="--c:var(--festival)">Scrivi a info@innovevent.eu</a><a class="btn" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer" style="--c:var(--arte)">@innovartfest</a></div></div>
+      <button class="seg" type="button" data-seg="arte" style="right:var(--gut);top:20px" aria-label="Segno nascosto dell'arte"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ARTIGIANATO ======== -->
+<section class="view" id="v-artigianato">
+  <div class="room" style="--c:var(--artigianato);--tc:#000">
+    <div class="room-head">
+      <span class="tag" data-ico="artigianato">Stanza artigianato</span>
+      <svg class="bigico ico" data-ico="artigianato" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      <h1 class="disp scr">Banco</h1>
+      <p>Tre giorni di mercato artigiano nelle vie del borgo e laboratori di ceramica.</p>
+    </div>
+    <div class="game">
+      <div class="game-bar"><h2>Il tornio</h2>
+        <div class="ctl"><span class="order">Ordine: <b id="tOrder">Vaso</b></span>
+          <button class="btn" type="button" id="tNew">Altro ordine</button>
+          <button class="btn" type="button" id="tReset">Rimpasta</button>
+          <button class="btn" type="button" id="tFire" style="--c:var(--festival)">Cuoci e vendi</button>
+        </div><span class="meter" id="tMeter" style="--tc:#000">Somiglianza 0%</span></div>
+      <canvas id="lathe" tabindex="0" aria-label="Tornio con un pezzo di argilla che gira. Trascina in orizzontale all'altezza che vuoi: verso il centro stringi, verso fuori allarghi. Segui la sagoma tratteggiata. Da tastiera: frecce su e giù per l'altezza, sinistra e destra per stringere e allargare, Invio per cuocere."></canvas>
+      <div class="tbar"><span class="hint"><span class="only-touch">Trascina il dito di lato sull'argilla</span><span class="only-kb">Trascina col mouse di lato sull'argilla</span>: verso il centro stringi, verso fuori allarghi. Segui la sagoma gialla.<span class="only-kb"> Da tastiera: frecce e Invio.</span></span><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><b style="font-size:14px">Smalto</b><div class="swatches" id="tGlaze"></div></div></div>
+      <div class="tshelf" id="tShelf" aria-label="Il tuo banco: gli ultimi pezzi cotti"></div>
+      <p id="tLive" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
+    </div>
+    <div class="pics" style="--n:3">
+      <figure class="tilt"><img src="img/borgo26-piazza-mercato.jpg" alt="La piazza del borgo con i banchi del mercato e i visitatori" loading="lazy"><figcaption>Il mercato, 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/artig26-bottega.jpg" alt="Un artigiano nella sua bottega tra attrezzi e oggetti" loading="lazy"><figcaption>Bottega, 2026</figcaption></figure>
+      <figure class="tilt"><img src="img/artig26-vasi.jpg" alt="Vasi e oggetti torniti esposti su un tavolo" loading="lazy"><figcaption>Ceramica, 2026</figcaption></figure>
+    </div>
+    <div class="txt"><h2 class="disp">Il mercato artigiano</h2>
+      <div class="p"><p>Per tre giorni il centro storico diventa un mercato: banchi nelle piazze, nei vicoli e nelle botteghe del borgo. Ci trovi chi lavora ceramica, vetro, metallo, carta e tessuto, e vende quello che ha fatto con le proprie mani.</p><p>San Sebastiano Curone è da sempre un paese di botteghe e di artigianato d'arte. Innovart riporta quel lavoro in strada, accanto alle installazioni, ai padiglioni e ai concerti. Dal 2026 Innovart è riconosciuta come fiera nazionale.</p><p>Ci sono anche laboratori di ceramica per bambini e per adulti: il tornio, dal vero.</p></div>
+    </div>
+    <div class="pics market" style="--n:4">
+      <figure class="tilt"><img src="img/artig26-zucche.jpg" alt="Pere e zucche di ceramica smaltata in tanti colori" loading="lazy"><figcaption>Ceramica smaltata</figcaption></figure>
+      <figure class="tilt"><img src="img/artig26-gioielli.jpg" alt="Orecchini e anelli di vetro colorato disposti su cartoncini" loading="lazy"><figcaption>Gioielli in vetro</figcaption></figure>
+      <figure class="tilt"><img src="img/artig26-tessuti.jpg" alt="Borse di raso avvolte in reti di cordoncino luccicante" loading="lazy"><figcaption>Tessuti e borse</figcaption></figure>
+      <figure class="tilt"><img src="img/artig26-ottone.jpg" alt="Un insetto costruito con ingranaggi e pezzi di ottone su un ramo di legno" loading="lazy"><figcaption>Ottone e recupero</figcaption></figure>
+    </div>
+    <div class="callout" style="position:relative">
+      <div><small>Espositori 2027</small><b class="disp">Vuoi esporre?</b><p>Le iscrizioni al mercato aprono in primavera: modulo e regolamento escono su Instagram @innovartfest.</p></div>
+      <div><small>Domande sul mercato?</small><p>Scrivici: rispondiamo ad artigiani, botteghe e laboratori.</p>
+        <div class="ctl"><a class="btn light" href="mailto:info@innovevent.eu?subject=Espositori%20mercato%20Innovart%202027" style="--c:var(--festival)">Scrivi a info@innovevent.eu</a><a class="btn" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer" style="--c:var(--artigianato)">@innovartfest</a></div></div>
+      <button class="seg" type="button" data-seg="artigianato" style="right:var(--gut);top:20px" aria-label="Segno nascosto dell'artigianato"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PROGRAMMA ======== -->
+<section class="view" id="v-programma">
+  <div class="room" style="--c:var(--ink);--tc:var(--paper)">
+    <div class="room-head">
+      <span class="tag" style="background:var(--festival);color:#000" data-ico="festival">Tre giorni</span>
+      <h1 class="disp scr">Programma</h1>
+      <p>Il programma della quarta edizione è in preparazione.</p>
+    </div>
+    <div class="soon">
+      <div class="soon-big"><small>Programma 2027</small><b class="disp">Coming soon</b></div>
+      <div class="soon-info">
+        <p><b>23–25 luglio 2027</b><br>San Sebastiano Curone (AL) · ingresso libero</p>
+        <p>Arte, artigianato, architettura, cinema e musica: date, orari e nomi escono in primavera, prima su Instagram.</p>
+        <div class="ctl"><a class="btn light" href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer" style="--c:var(--festival)">Seguici su @innovartfest</a></div>
+      </div>
+    </div>
+    <!-- programma: pronto per quando escono i nomi, per ora nascosto -->
+    <div class="chips" id="chips" role="group" aria-label="Filtra per sezione" hidden></div>
+    <div class="days" id="days" hidden></div>
+  </div>
+</section>
+
+<!-- ======== INFO ======== -->
+<section class="view" id="v-info">
+  <div class="room" style="--c:var(--festival);--tc:#000">
+    <div class="room-head" style="display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between;align-items:flex-end">
+      <div><span class="tag" data-ico="festival">Coordinate</span>
+      <h1 class="disp scr">Info</h1>
+      <p>San Sebastiano Curone (AL), 44°47′ N 9°04′ E. Circa 1 h 30 da Milano, 1 h 15 da Genova, 30 min da Tortona.</p></div>
+      <div class="radar" aria-hidden="true"></div>
+    </div>
+    <a class="mail" href="mailto:info@innovevent.eu"><div><span>info@innovevent.eu</span><span>info@innovevent.eu</span><span>info@innovevent.eu</span><span>info@innovevent.eu</span></div></a>
+    <a class="mail" href="mailto:cinema@innovevent.eu"><div><span>cinema@innovevent.eu</span><span>cinema@innovevent.eu</span><span>cinema@innovevent.eu</span><span>cinema@innovevent.eu</span></div></a>
+    <a class="mail" href="mailto:architettura@innovevent.eu"><div><span>architettura@innovevent.eu</span><span>architettura@innovevent.eu</span><span>architettura@innovevent.eu</span></div></a>
+    <a class="mail" href="https://www.instagram.com/innovartfest/"><div><span>@innovartfest</span><span>@innovartfest</span><span>@innovartfest</span><span>@innovartfest</span><span>@innovartfest</span></div></a>
+    <div class="partners">
+      <div>Comune di San Sebastiano Curone</div><div>Fondazione CRT</div><div>Fondazione Cassa di Risparmio di Tortona</div>
+      <div>Fondazione Cassa di Risparmio di Alessandria</div><div>APOS, Associazione Bambini Affetti da Paralisi Ostetrica</div><div>Innovevent</div>
+    </div>
+    <div class="txt"><h2 class="disp">Via Garibaldi 18</h2><div class="p"><p>Innovart avrà una casa tutto l'anno: sede dell'associazione e residenza artistica temporanea. Progetto in corso.</p><p>Sede legale: Via Istituto Giani 2, San Sebastiano Curone (AL).</p></div></div>
+  </div>
+</section>
+
+<!-- ======== PRIVACY E NOTE LEGALI ======== -->
+<section class="view" id="v-privacy">
+  <div class="room" style="--c:var(--paper);--tc:#000">
+    <div class="room-head">
+      <span class="tag" data-ico="festival">Documenti</span>
+      <h1 class="disp scr">Privacy e note legali</h1>
+      <p>Cosa succede ai tuoi dati su questo sito (quasi niente) e chi siamo. Ultimo aggiornamento: 21 novembre 2026.</p>
+    </div>
+    <div class="legal">
+      <section><h2>Chi siamo</h2>
+        <p>Il sito è gestito da <b>Innovevent</b>, associazione culturale senza scopo di lucro, sede legale in Via Istituto Giani 2, 15056 San Sebastiano Curone (AL).<br>
+        Codice fiscale: 94029040063 · Partita IVA: 02754390066<br>
+        Email: <a href="mailto:info@innovevent.eu">info@innovevent.eu</a> · PEC: <a href="mailto:innovevent@pec.it">innovevent@pec.it</a></p>
+      </section>
+      <section><h2>Informativa privacy</h2>
+        <p>Questa informativa è resa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 (GDPR) e del D.Lgs. 196/2003 (Codice privacy). Il titolare del trattamento è l'associazione Innovevent, ai recapiti indicati sopra.</p>
+        <p><b>Navigazione.</b> Il sito non usa strumenti di statistica, pubblicità o profilazione e non carica risorse da server di terzi: caratteri tipografici e librerie sono ospitati sul sito stesso. Come ogni sito web, il server che lo ospita può registrare dati tecnici delle richieste (indirizzo IP, data e ora, pagina richiesta, tipo di browser) per garantirne il funzionamento e la sicurezza. Base giuridica: legittimo interesse del titolare (art. 6.1.f GDPR). Il sito è ospitato su GitHub Pages, servizio di GitHub, Inc. (Stati Uniti). GitHub registra l'indirizzo IP di chi visita il sito per motivi di sicurezza e tratta questi dati secondo la propria informativa (<a href="https://docs.github.com/it/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>), che ne stabilisce anche i tempi di conservazione; noi non abbiamo accesso a questi registri. Il trasferimento verso gli Stati Uniti avviene nel quadro dell'EU-U.S. Data Privacy Framework e delle clausole contrattuali standard.</p>
+        <p><b>Email.</b> Se ci scrivi a uno degli indirizzi pubblicati usiamo i tuoi dati (indirizzo email, nome e quanto ci scrivi) solo per risponderti e gestire la richiesta. Base giuridica: misure su tua richiesta e legittimo interesse (art. 6.1.b e 6.1.f GDPR). Conserviamo la corrispondenza per il tempo necessario a gestirla e comunque non oltre 24 mesi, salvo obblighi di legge.</p>
+        <p><b>Dati salvati nel tuo browser.</b> I giochi del sito ricordano i segni trovati e i pezzi fatti al tornio salvandoli nella memoria locale del tuo browser (localStorage, chiavi <code>innovart-segni</code> e <code>innovart-tornio</code>). Restano sul tuo dispositivo, non ci vengono inviati e non servono a riconoscerti. Sono strumenti tecnici necessari alla funzione che usi, per cui non serve il consenso (art. 122 Codice privacy; Linee guida del Garante del 10 giugno 2021). Puoi cancellarli quando vuoi: <button class="btn" type="button" id="wipe" style="--c:var(--arte);font-size:14px;padding:6px 12px">Cancella i dati dei giochi</button></p>
+        <p><b>Cookie.</b> Il sito non installa cookie.</p>
+        <p><b>Link esterni.</b> Il link a Instagram porta a un sito di terzi (Meta Platforms Ireland Ltd.), che tratta i dati secondo la propria informativa. Il nostro sito non incorpora contenuti di Instagram.</p>
+        <p><b>Destinatari e trasferimenti.</b> I dati non vengono diffusi né ceduti. Possono accedervi solo il fornitore di hosting (GitHub) e i fornitori della posta elettronica, come responsabili del trattamento. Le caselle @innovevent.eu sono gestite da Aruba S.p.A., con server in Italia. Per alcune comunicazioni usiamo anche caselle Google (Gmail): Google può trattare i dati anche fuori dallo Spazio economico europeo, in particolare negli Stati Uniti, sulla base della decisione di adeguatezza UE-USA (EU-U.S. Data Privacy Framework) e delle clausole contrattuali standard approvate dalla Commissione europea.</p>
+        <p><b>I tuoi diritti.</b> Puoi chiedere in ogni momento accesso, rettifica, cancellazione, limitazione, portabilità dei dati e opporti al trattamento (artt. 15–22 GDPR), scrivendo a <a href="mailto:info@innovevent.eu">info@innovevent.eu</a>. Hai anche diritto di proporre reclamo al Garante per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">garanteprivacy.it</a>).</p>
+      </section>
+      <section><h2>Note legali</h2>
+        <p>Testi, grafica e fotografie sono di Innovevent o dei rispettivi autori e non possono essere riprodotti senza autorizzazione. Fotografie di Alice Fois.</p>
+        <p>Caratteri tipografici: Bricolage Grotesque (Ateliertriay) e Newsreader (Production Type), con licenza SIL Open Font License 1.1; Satoshi (Indian Type Foundry), con licenza ITF Free Font License. Motore fisico dei giochi: Matter.js di Liam Brummitt, licenza MIT.</p>
+      </section>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <b class="disp">INNOVART 4</b>
+  <p>23–25 luglio 2027, San Sebastiano Curone (AL)<br>Prodotto da Innovevent · Via Istituto Giani 2, 15056 San Sebastiano Curone (AL) · C.F. 94029040063 · P.IVA 02754390066<br><a href="mailto:info@innovevent.eu">info@innovevent.eu</a> · <a href="https://www.instagram.com/innovartfest/" target="_blank" rel="noopener noreferrer">@innovartfest</a> · <a href="#privacy">Privacy e note legali</a> · Nessun cookie · Foto di Alice Fois</p>
+</footer>
+
+<div class="shot" id="shot" role="dialog" aria-modal="true" aria-label="La tua opera"><div><p>La tua opera. Scaricala o condividila<span class="only-touch"> (oppure tieni premuto sull'immagine)</span>.</p><img id="shotImg" alt="Composizione generata con i segni di Innovart"><div class="ctl"><button class="btn light" type="button" id="shotDl" style="--c:var(--festival)">Scarica PNG</button><button class="btn" type="button" id="shotShare" style="--c:var(--cinema)" hidden>Condividi</button><button class="btn" type="button" id="shotClose" style="--c:var(--arte)">Chiudi</button></div></div></div>
+<div class="pass" id="pass" role="dialog" aria-modal="true" aria-labelledby="passT">
+  <div class="ticket">
+    <div class="t1"><span style="font-weight:900">PASS SBLOCCATO</span><b class="disp" id="passT">INNOVART 4</b><p>Hai trovato tutti e cinque i segni. Ci vediamo in piazza, 23–25 luglio 2027.</p></div>
+    <div class="t2" id="passIcons"></div>
+    <div class="t3"><span style="font-weight:900">San Sebastiano Curone · ingresso libero</span><button class="btn" type="button" id="passClose" style="--c:var(--arte)">Chiudi</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(/iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) document.documentElement.classList.add('is-ios');
+const hover = matchMedia('(hover:hover)').matches;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const COL = {festival:'#BBFF36',cinema:'#0155FD',musica:'#7903F4',arte:'#FF00FE',artigianato:'#FFB600',architettura:'#FF2B15',ink:'#000000',paper:'#F3F3F3'};
+const BRAND = ['#BBFF36','#0155FD','#7903F4','#FF00FE','#FFB600','#FF2B15'];
+const darkText = c => c === COL.festival || c === COL.artigianato || c === COL.paper;
+
+/* ---------------- icone: stringhe path (SVG + canvas) ---------------- */
+function rot(p, a){ const r = a*Math.PI/180, c = Math.cos(r), s = Math.sin(r); return [50+(p[0]-50)*c-(p[1]-50)*s, 50+(p[0]-50)*s+(p[1]-50)*c].map(v=>v.toFixed(1)); }
+const D = {
+  cinema: 'M 50.0 6.2 L 55.7 23.8 L 68.0 10.1 L 66.1 28.4 L 82.9 20.9 L 73.7 36.8 L 92.1 36.8 L 77.2 47.6 L 94.0 55.1 L 76.0 58.9 L 88.3 72.6 L 70.3 68.8 L 76.0 86.3 L 61.1 75.4 L 59.2 93.8 L 50.0 77.8 L 40.8 93.8 L 38.9 75.4 L 24.0 86.3 L 29.7 68.8 L 11.7 72.6 L 24.0 58.9 L 6.0 55.1 L 22.8 47.6 L 7.9 36.8 L 26.3 36.8 L 17.1 20.9 L 33.9 28.4 L 32.0 10.1 L 44.3 23.8Z M 50.0 6.2',
+  musica: 'M 49.9 50.0 C 45.8 40.6 51.8 29.5 60.7 25.4 C 70.2 20.7 82.7 23.4 89.1 31.8 C 92.1 35.8 93.7 40.7 93.2 45.6 C 93.0 47.1 92.7 48.6 92.0 50.0 C 91.3 48.6 90.7 47.4 90.0 46.2 C 86.1 39.5 78.5 34.7 70.9 34.8 C 61.4 34.7 53.6 41.3 49.9 50.0 M 49.9 50.0 C 39.7 48.9 33.1 38.1 34.0 28.3 C 34.6 17.7 43.2 8.2 53.8 6.9 C 58.7 6.3 63.7 7.4 67.7 10.3 C 69.0 11.2 70.1 12.2 70.9 13.5 C 69.4 13.4 68.0 13.3 66.6 13.3 C 58.8 13.4 50.9 17.5 47.2 24.1 C 42.4 32.4 44.2 42.4 49.9 50.0 M 49.9 50.0 C 43.8 58.2 31.2 58.5 23.1 52.9 C 14.3 47.1 10.4 34.9 14.5 25.1 C 16.4 20.5 19.9 16.7 24.4 14.7 C 25.8 14.1 27.3 13.6 28.8 13.5 C 27.9 14.8 27.2 15.9 26.5 17.1 C 22.6 23.9 22.2 32.8 26.1 39.4 C 30.9 47.6 40.4 51.1 49.9 50.0 M 49.9 50.0 C 53.9 59.4 47.9 70.5 39.0 74.6 C 29.5 79.3 17.0 76.6 10.6 68.2 C 7.6 64.2 6.0 59.3 6.5 54.4 C 6.7 52.9 7.1 51.4 7.7 50.0 C 8.4 51.4 9.0 52.6 9.7 53.8 C 13.7 60.5 21.2 65.3 28.8 65.2 C 38.3 65.3 46.1 58.7 49.9 50.0 M 49.9 50.0 C 60.0 51.1 66.6 61.9 65.7 71.7 C 65.1 82.3 56.5 91.8 46.0 93.0 C 41.0 93.7 36.0 92.6 32.0 89.7 C 30.8 88.8 29.7 87.8 28.8 86.5 C 30.3 86.6 31.7 86.7 33.1 86.7 C 40.9 86.6 48.8 82.5 52.5 75.9 C 57.3 67.6 55.5 57.6 49.9 50.0 M 49.9 50.0 C 53.7 44.7 60.6 42.6 67.0 43.5 C 85.8 46.0 94.0 70.3 79.4 82.8 C 77.0 84.8 74.0 86.2 70.9 86.5 C 71.8 85.2 72.6 84.1 73.2 82.9 C 77.1 76.1 77.5 67.2 73.6 60.6 C 68.9 52.4 59.3 48.9 49.9 50.0',
+  arte: 'M 35.3 64.7 L 6.0 64.7 L 6.0 35.3Z M 35.3 64.7 M 64.7 94.0 L 35.3 94.0 L 35.3 64.7Z M 64.7 94.0 M 35.3 35.3 L 6.0 35.3 L 6.0 6.0Z M 35.3 35.3 M 64.7 64.7 L 35.3 64.7 L 35.3 35.3Z M 64.7 64.7 M 94.0 64.7 L 64.7 64.7 L 64.7 35.3Z M 94.0 64.7 M 94.0 94.0 L 64.7 94.0 L 64.7 64.7Z M 94.0 94.0 M 64.7 35.3 L 35.3 35.3 L 35.3 6.0Z M 64.7 35.3 M 94.0 35.3 L 64.7 35.3 L 64.7 6.0Z M 94.0 35.3 M 35.3 94.0 L 6.0 94.0 L 6.0 64.7Z M 35.3 94.0',
+  artigianato: 'M 64.4 6.0 L 64.4 35.4 L 35.6 35.4 L 35.6 64.6 L 6.1 64.6 L 6.1 94.0 L 35.6 94.0 L 35.6 93.7 L 93.9 93.7 L 93.9 35.4 L 93.9 6.0Z M 64.4 6.0',
+  architettura: 'M8 92L50 8L92 92H72A22 22 0 0 0 28 92Z',
+  festival: 'M 12.5 88.8 C 6.8 83.2 0.0 86.0 0.0 92.7 L 0.0 195.4 L 56.2 195.4 C 64.1 195.4 69.9 187.7 67.5 180.1 C 57.3 146.8 37.9 116.5 12.5 88.8 M 254.8 0.0 L 36.8 0.0 C 29.0 0.0 23.3 7.4 25.3 14.9 C 42.5 79.2 78.6 137.2 126.9 190.1 C 126.9 190.1 126.9 190.1 127.0 190.1 C 137.2 200.0 149.3 195.1 149.3 183.1 L 149.3 35.8 C 168.2 91.8 201.6 143.0 244.6 190.1 C 254.9 200.0 267.0 195.1 267.0 183.1 L 267.0 12.2 C 267.0 5.5 261.5 0.0 254.8 0.0'
+};
+const VB = k => k==='festival' ? '-7 -40 281 281' : '0 0 100 100';
+const svgIco = k => `<svg viewBox="${VB(k)}" aria-hidden="true"><path fill="currentColor" d="${D[k]}"/></svg>`;
+const P2D = {}; Object.keys(D).forEach(k => P2D[k] = new Path2D(D[k]));
+$$('[data-ico]').forEach(el => {
+  if(el.tagName.toLowerCase()==='svg'){ el.setAttribute('viewBox', VB(el.dataset.ico)); el.innerHTML = `<path fill="currentColor" d="${D[el.dataset.ico]}"/>`; }
+  else el.insertAdjacentHTML('afterbegin', svgIco(el.dataset.ico));
+});
+
+/* ---------------- stanze ---------------- */
+const ROOMS = [
+  {id:'home', t:'Hub', c:COL.festival, ico:'festival', d:'Il campo da gioco'},
+  {id:'arte', t:'Arte', c:COL.arte, ico:'arte', d:'Genera la tua opera'},
+  {id:'artigianato', t:'Artigianato', c:COL.artigianato, ico:'artigianato', d:'Modella un vaso'},
+  {id:'architettura', t:'Architettura', c:COL.architettura, ico:'architettura', d:'Costruisci un padiglione'},
+  {id:'cinema', t:'Cinema', c:COL.cinema, ico:'cinema', d:'Accendi il proiettore'},
+  {id:'musica', t:'Musica', c:COL.musica, ico:'musica', d:'Suona la piazza'},
+  {id:'programma', t:'Programma', c:COL.ink, ico:'festival', d:'In arrivo · 23–25 luglio'},
+  {id:'info', t:'Info', c:COL.paper, ico:'festival', d:'Contatti e coordinate'}
+];
+const R = Object.fromEntries(ROOMS.map(r=>[r.id,r])); R.privacy = {id:'privacy', c:COL.paper};
+$('#rooms').innerHTML = ROOMS.map(r => `<a href="#${r.id}" style="--c:${r.c};--tc:${darkText(r.c)?'#000':'#fff'}">${svgIco(r.ico)}<span>${r.t}</span></a>`).join('');
+$('#menuList').innerHTML = ROOMS.map(r => `<a href="#${r.id}" style="--c:${r.id==='info'?'#fff':r.c};--tc:${r.id==='info'||darkText(r.c)?'#000':'#fff'}">${svgIco(r.ico)}<span><b>${r.t}</b><small>${r.d||''}</small></span></a>`).join('');
+function menu(open){ $('#menu').classList.toggle('open', open); $('#menuBtn').setAttribute('aria-expanded', open); document.body.style.overflow = open ? 'hidden' : ''; if(open) $('#menuClose').focus(); }
+$('#menuBtn').onclick = () => menu(true); $('#menuClose').onclick = () => { menu(false); $('#menuBtn').focus(); };
+$('#menu').addEventListener('click', e => { if(e.target.closest('a')) menu(false); });
+addEventListener('keydown', e => { if(e.key === 'Escape' && $('#menu').classList.contains('open')){ menu(false); $('#menuBtn').focus(); } });
+$('#doors').innerHTML = ROOMS.filter(r=>r.id!=='home').map(r => `<a class="door" href="#${r.id}" style="--c:${r.c};--tc:${darkText(r.c)?'#000':'#fff'}${r.id==='info'?';background:#fff':''}">${svgIco(r.ico)}<div><b>${r.t}</b><small>${r.d}</small></div></a>`).join('');
+
+/* marquee e striscia */
+const SEGLBL = {arte:'ARTE',artigianato:'ARTIGIANATO',architettura:'ARCHITETTURA',cinema:'CINEMA',musica:'MUSICA'};
+const SEGNAME = {arte:'arte',artigianato:'artigianato',architettura:'architettura',cinema:'cinema',musica:'musica'};
+const mmT = ['INNOVART','23–25.07.2027','ARTE','ARTIGIANATO','ARCHITETTURA','CINEMA','MUSICA','VAL CURONE'];
+$('#mm').innerHTML = [...mmT,...mmT].map(t=>`<span>${t}</span>`).join('');
+const PH = [['arte-installazione-1','arte','arte'],['off26-padiglione','architettura','architettura'],['musica26-palco','musica','musica'],['borgo26-piazza-mercato','artigianato','artigianato'],['off26-dal-basso','architettura','architettura'],['artig26-gioielli','artigianato','artigianato'],['arte26-fili-rossi','architettura','architettura'],['borgo26-ponte','festival','info'],['off-cantiere-1','architettura','architettura'],['musica-live-1','musica','musica'],['cinema-schermo','cinema','cinema'],['borgo-vicolo','artigianato','artigianato'],['off-cantiere-2','architettura','architettura'],['musica-palco','musica','musica'],['cinema-pubblico','cinema','cinema'],['musica-live-2','musica','musica'],['off-attrezzi','arte','architettura']];
+$('#strip').innerHTML = [...PH,...PH].map(p=>`<figure style="--c:${COL[p[1]]}"><a href="#${p[2]}" tabindex="-1"><img src="img/${p[0]}.jpg" alt="" loading="lazy"></a></figure>`).join('');
+
+/* ---------------- audio ---------------- */
+let AC = null, soundOn = true;
+function ac(){ if(!AC){ try{ AC = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} } if(AC && AC.state==='suspended') AC.resume(); return AC; }
+$('#snd').addEventListener('click', e => { soundOn = !soundOn; e.currentTarget.setAttribute('aria-pressed', soundOn); });
+function env(g, t, a, d, v){ g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+a); g.gain.exponentialRampToValueAtTime(0.0001,t+a+d); }
+function noise(dur){ const a=ac(), b=a.createBuffer(1,a.sampleRate*dur,a.sampleRate), d=b.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; const s=a.createBufferSource(); s.buffer=b; return s; }
+const SND = {
+  kick(){ const a=ac(),t=a.currentTime,o=a.createOscillator(),g=a.createGain(); o.frequency.setValueAtTime(160,t); o.frequency.exponentialRampToValueAtTime(40,t+.18); env(g,t,.005,.3,1); o.connect(g).connect(a.destination); o.start(t); o.stop(t+.4); },
+  snare(){ const a=ac(),t=a.currentTime,n=noise(.25),f=a.createBiquadFilter(),g=a.createGain(); f.type='highpass'; f.frequency.value=1200; env(g,t,.003,.18,.7); n.connect(f).connect(g).connect(a.destination); n.start(t); const o=a.createOscillator(),g2=a.createGain(); o.frequency.value=190; env(g2,t,.003,.1,.5); o.connect(g2).connect(a.destination); o.start(t); o.stop(t+.15); },
+  hat(){ const a=ac(),t=a.currentTime,n=noise(.08),f=a.createBiquadFilter(),g=a.createGain(); f.type='highpass'; f.frequency.value=7000; env(g,t,.002,.05,.4); n.connect(f).connect(g).connect(a.destination); n.start(t); },
+  clap(){ const a=ac(),t=a.currentTime; [0,.012,.024].forEach(o=>{ const n=noise(.12),f=a.createBiquadFilter(),g=a.createGain(); f.type='bandpass'; f.frequency.value=1500; env(g,t+o,.002,.09,.6); n.connect(f).connect(g).connect(a.destination); n.start(t+o); }); },
+  bass(){ const a=ac(),t=a.currentTime,o=a.createOscillator(),f=a.createBiquadFilter(),g=a.createGain(); o.type='sawtooth'; o.frequency.value=[55,65.4,73.4,82.4][Math.floor(Math.random()*4)]; f.type='lowpass'; f.frequency.setValueAtTime(900,t); f.frequency.exponentialRampToValueAtTime(120,t+.3); env(g,t,.005,.35,.6); o.connect(f).connect(g).connect(a.destination); o.start(t); o.stop(t+.45); },
+  chord(){ const a=ac(),t=a.currentTime; [220,277.2,329.6,415.3].forEach(fq=>{ const o=a.createOscillator(),g=a.createGain(); o.type='square'; o.frequency.value=fq; env(g,t,.005,.25,.08); o.connect(g).connect(a.destination); o.start(t); o.stop(t+.35); }); },
+  laser(){ const a=ac(),t=a.currentTime,o=a.createOscillator(),g=a.createGain(); o.type='sawtooth'; o.frequency.setValueAtTime(1800,t); o.frequency.exponentialRampToValueAtTime(90,t+.35); env(g,t,.005,.35,.25); o.connect(g).connect(a.destination); o.start(t); o.stop(t+.45); },
+  siren(){ const a=ac(),t=a.currentTime,o=a.createOscillator(),g=a.createGain(); o.type='triangle'; o.frequency.setValueAtTime(300,t); o.frequency.exponentialRampToValueAtTime(1400,t+.5); env(g,t,.02,.5,.3); o.connect(g).connect(a.destination); o.start(t); o.stop(t+.6); },
+  blip(f=660){ const a=ac(); if(!a) return; const t=a.currentTime,o=a.createOscillator(),g=a.createGain(); o.type='square'; o.frequency.value=f; env(g,t,.003,.08,.06); o.connect(g).connect(a.destination); o.start(t); o.stop(t+.1); },
+  chime(){ [523,659,784,1046].forEach((f,i)=>setTimeout(()=>SND.blip(f),i*90)); }
+};
+function play(n,...a){ if(!soundOn) return; try{ SND[n](...a); }catch(e){} }
+
+/* ---------------- fx: scia del cursore e coriandoli ---------------- */
+const fx = $('#fx'), fg = fx.getContext('2d'); let parts = [], DPR = Math.min(2, devicePixelRatio||1);
+function sizeFx(){ fx.width = innerWidth*DPR; fx.height = innerHeight*DPR; fg.setTransform(DPR,0,0,DPR,0,0); }
+sizeFx(); addEventListener('resize', sizeFx);
+let ci = 0;
+if(hover && !reduce) addEventListener('pointermove', e => { if(Math.random()<.55) parts.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5,s:6+Math.random()*10,c:BRAND[ci++%6],l:1,g:0,r:Math.random()*6}); });
+function burst(x,y,n=60){ if(reduce) return; for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, v=4+Math.random()*9; parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,s:8+Math.random()*12,c:BRAND[i%6],l:1,g:.32,r:Math.random()*6,tri:Math.random()<.5}); } }
+(function fxLoop(){
+  fg.clearRect(0,0,innerWidth,innerHeight);
+  parts = parts.filter(p => p.l > 0);
+  for(const p of parts){ p.x+=p.vx; p.y+=p.vy; p.vy+=p.g; p.l-=p.g?0.012:0.035; p.r+=.1;
+    fg.save(); fg.globalAlpha=Math.max(0,p.l); fg.translate(p.x,p.y); fg.rotate(p.r); fg.fillStyle=p.c;
+    if(p.tri){ fg.beginPath(); fg.moveTo(-p.s/2,p.s/2); fg.lineTo(p.s/2,p.s/2); fg.lineTo(-p.s/2,-p.s/2); fg.fill(); } else fg.fillRect(-p.s/2,-p.s/2,p.s*p.l,p.s*p.l);
+    fg.restore(); }
+  requestAnimationFrame(fxLoop);
+})();
+
+/* ---------------- toast ---------------- */
+let tt; function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2600); }
+
+/* ---------------- testo che si ricompone ---------------- */
+function scramble(el){
+  if(reduce) return; const fin = el.dataset.t || (el.dataset.t = el.textContent); const ch='!<>-_/[]{}=+*^?#█▓▒░INNOVART'; let f=0;
+  const tot = 26; (function step(){ el.textContent = fin.split('').map((c,i)=> i < (f/tot)*fin.length ? c : ch[Math.floor(Math.random()*ch.length)]).join(''); if(++f<=tot) requestAnimationFrame(step); else el.textContent=fin; })();
+}
+
+/* ---------------- transizione a pixel ---------------- */
+const pix = $('#pix'); let tiles = [], pc = 0, pr = 0;
+function buildPix(){ const s = innerWidth < 700 ? 70 : 110; pc = Math.ceil(innerWidth/s); pr = Math.ceil(innerHeight/s); pix.style.gridTemplateColumns=`repeat(${pc},1fr)`; pix.style.gridTemplateRows=`repeat(${pr},1fr)`; pix.innerHTML='<i></i>'.repeat(pc*pr); tiles=[...pix.children]; }
+buildPix(); addEventListener('resize', buildPix);
+let lastX = innerWidth/2, lastY = innerHeight/2; addEventListener('pointerdown', e => { lastX=e.clientX; lastY=e.clientY; }, true);
+
+/* ---------------- routing ---------------- */
+let cur = null, first = true;
+function show(id){
+  $$('.view').forEach(v => v.classList.toggle('on', v.id === 'v-'+id));
+  $$('#rooms a').forEach(a => a.getAttribute('href')==='#'+id ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'));
+  scrollTo(0,0); cur = id;
+  $$('#v-'+id+' .scr').forEach(scramble);
+  hubActive = id === 'home'; buildActive = id === 'architettura'; latheActive = id === 'artigianato';
+  if(hubActive && !world) initWorld();
+  if(buildActive) initBuild();
+  if(id === 'arte') initPaint();
+  if(latheActive) initLathe();
+  if(id === 'cinema') count($('#num700'), 700);
+  if(id === 'home') $$('.count').forEach(c => count(c, +c.dataset.n));
+}
+function route(){
+  const id = R[location.hash.slice(1)] ? location.hash.slice(1) : 'home';
+  if(first || reduce){ first=false; show(id); return; }
+  const c = R[id].c;
+  const cw = innerWidth/pc, chh = innerHeight/pr; let max = 0;
+  tiles.forEach((t,i) => { const x=(i%pc+.5)*cw, y=(Math.floor(i/pc)+.5)*chh, d=Math.hypot(x-lastX,y-lastY); const dl = d/2.6; max=Math.max(max,dl);
+    t.style.background = Math.random()<.18 ? BRAND[Math.floor(Math.random()*6)] : c; t.style.transitionDelay = dl+'ms'; });
+  play('blip', 330);
+  pix.classList.add('in');
+  setTimeout(() => {
+    show(id);
+    tiles.forEach((t,i) => { const x=(i%pc+.5)*cw, y=(Math.floor(i/pc)+.5)*chh; t.style.transitionDelay = (Math.hypot(x-lastX,y-lastY)/2.6)+'ms'; });
+    pix.classList.remove('in');
+  }, max + 340);
+}
+addEventListener('hashchange', route);
+$('#hubDown').addEventListener('click', e => { e.preventDefault(); $('#intro').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); });
+
+/* contatore */
+function count(el, n){ if(reduce){ el.textContent=n; return; } const t0=performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/1200); el.textContent=Math.round(n*(1-Math.pow(1-p,4))); if(p<1) requestAnimationFrame(f); })(t0); }
+
+/* ---------------- HUB: mondo fisico ---------------- */
+const M = window.Matter; let world = null, engine = null, hubActive = false, hubBodies = [], zeroG = false;
+const IMGS = {}; ['arte-installazione-1','off26-padiglione','musica26-palco','cinema-schermo','artig26-vasi'].forEach(k => { const i = new Image(); i.src = `img/${k}.jpg`; IMGS[k] = i; });
+function noWheel(mouse){ ['mousewheel','DOMMouseScroll','wheel'].forEach(ev => mouse.element.removeEventListener(ev, mouse.mousewheel)); }
+function initWorld(){
+  if(!M){ $('.hub-hint').textContent = 'Il gioco non si è caricato: le stanze sono qui sotto.'; return; }
+  const cv = $('#world'), g = cv.getContext('2d');
+  engine = M.Engine.create(); world = engine.world;
+  let W, H;
+  let topFree = 0;
+  function walls(){
+    const ws = [M.Bodies.rectangle(W/2,H+50,W*3,100,{isStatic:true}), M.Bodies.rectangle(-50,H/2,100,H*4,{isStatic:true}), M.Bodies.rectangle(W+50,H/2,100,H*4,{isStatic:true}), M.Bodies.rectangle(W/2,-50,W*3,100,{isStatic:true})];
+    /* zona del titolo: i blocchi ci rimbalzano contro e non coprono data e luogo */
+    const cr = cv.getBoundingClientRect(); topFree = 0;
+    $$('.hub-txt .k, .hub-txt p').forEach(el => { const r = el.getBoundingClientRect(); if(!r.width) return; const pad = 10, x = r.left-cr.left-pad, y = 0, w = r.width+pad*2, h = r.bottom-cr.top+pad; ws.push(M.Bodies.rectangle(x+w/2, y+h/2, w, h, {isStatic:true})); topFree = Math.max(topFree, h); });
+    return ws;
+  }
+  function populate(){
+    M.Composite.clear(world, false);
+    W = cv.clientWidth; H = cv.clientHeight; cv.pixelRatio = DPR; cv.width = W*DPR; cv.height = H*DPR;
+    M.Composite.add(world, walls());
+    const U = Math.max(44, Math.min(150, Math.min(W, H)/(W < 700 ? 7.2 : 5.6)));
+    hubBodies = [];
+    const mk = (w,h,opt,data) => { const y0 = topFree + h/2 + 4, y1 = Math.max(y0, H*.72 - h/2); const b = M.Bodies.rectangle(w/2+4+Math.random()*Math.max(1,W-w-8), y0+Math.random()*(y1-y0), w, h, Object.assign({restitution:.35, friction:.35, chamfer:{radius:Math.min(w,h)*.06}}, opt)); b.plugin = Object.assign({w,h}, data); M.Body.setAngle(b,(Math.random()-.5)*.8); hubBodies.push(b); return b; };
+    const letCols = [COL.ink, COL.festival, COL.ink, COL.arte, COL.ink, COL.cinema, COL.ink, COL.artigianato];
+    [...'INNOVART'].forEach((ch,i) => mk(ch==='I'?U*.62:U*.95, U*1.15, {}, {type:'letter', ch, col:letCols[i]}));
+    ['arte','artigianato','architettura','cinema','musica'].forEach(k => mk(U*1.12, U*1.12, {}, {type:'seg', k, col:COL[k], go:k}));
+    [['arte-installazione-1','arte'],['off26-padiglione','architettura'],['musica26-palco','musica'],['cinema-schermo','cinema'],['artig26-vasi','artigianato']].forEach(([k,go],i) => { const tall = k==='cinema-schermo'||k==='artig26-vasi'; mk(tall?U*1.1:U*1.8, tall?U*1.6:U*1.2, {}, {type:'img', k, go, col:BRAND[i]}); });
+    mk(U*2.6, U*.8, {}, {type:'tag', txt:'23–25.07', col:COL.festival});
+    mk(U*2.2, U*.7, {}, {type:'tag', txt:'VAL CURONE', col:COL.architettura});
+    M.Composite.add(world, hubBodies);
+  }
+  populate();
+  const mouse = M.Mouse.create(cv); noWheel(mouse);
+  /* tocco: se il dito parte da un blocco lo trascini, se parte dal vuoto la pagina scorre */
+  ['touchstart','touchmove','touchend'].forEach((ev,i) => mouse.element.removeEventListener(ev, [mouse.mousedown, mouse.mousemove, mouse.mouseup][i]));
+  let tDrag = false;
+  const tPos = t => { const r = cv.getBoundingClientRect(); return {x:t.clientX-r.left, y:t.clientY-r.top}; };
+  cv.addEventListener('touchstart', e => { if(e.touches.length !== 1) return; if(M.Query.point(hubBodies, tPos(e.touches[0])).length){ e.preventDefault(); tDrag = true; mouse.mousedown(e); } }, {passive:false});
+  cv.addEventListener('touchmove', e => { if(tDrag){ e.preventDefault(); mouse.mousemove(e); } }, {passive:false});
+  ['touchend','touchcancel'].forEach(ev => cv.addEventListener(ev, e => { if(tDrag){ tDrag = false; mouse.mouseup(e); } }));
+  const mc = M.MouseConstraint.create(engine, {mouse, constraint:{stiffness:.2, render:{visible:false}}});
+  M.Composite.add(world, mc);
+  let down = null;
+  M.Events.on(mc, 'mousedown', () => { down = {x:mouse.position.x, y:mouse.position.y, t:performance.now(), b:M.Query.point(hubBodies, mouse.position)[0]}; });
+  M.Events.on(mc, 'mouseup', () => {
+    if(!down) return; const moved = Math.hypot(mouse.position.x-down.x, mouse.position.y-down.y);
+    if(down.b && moved < 8 && performance.now()-down.t < 350){
+      const p = down.b.plugin; const r = cv.getBoundingClientRect();
+      M.Body.setVelocity(down.b, {x:(Math.random()-.5)*20, y:-18}); M.Body.setAngularVelocity(down.b,(Math.random()-.5)*.5); burst(r.left+down.x, r.top+down.y, 24); play('blip', 880);
+    } else if(down.b && moved >= 8){ play('blip', 220); }
+    down = null;
+  });
+  M.Events.on(mc, 'mousemove', () => { cv.style.cursor = M.Query.point(hubBodies, mouse.position).length ? (mc.body ? 'grabbing' : 'grab') : 'default'; });
+  M.Events.on(engine, 'collisionStart', e => { for(const pr of e.pairs){ const v = Math.hypot(pr.bodyA.velocity.x-pr.bodyB.velocity.x, pr.bodyA.velocity.y-pr.bodyB.velocity.y); if(v > 14 && hubActive && Math.random()<.4) play('hat'); } });
+  $('#shake').onclick = () => { hubBodies.forEach(b => { M.Body.setVelocity(b, {x:(Math.random()-.5)*30, y:-10-Math.random()*22}); M.Body.setAngularVelocity(b,(Math.random()-.5)*.6); }); play('kick'); const r=cv.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height*.6, 80); };
+  $('#zerog').onclick = e => { zeroG = !zeroG; engine.gravity.y = zeroG ? 0 : 1; e.currentTarget.setAttribute('aria-pressed', zeroG); if(zeroG) hubBodies.forEach(b => M.Body.setVelocity(b,{x:(Math.random()-.5)*6,y:-4-Math.random()*6})); play('siren'); };
+  $('#reset').onclick = () => { zeroG=false; engine.gravity.y=1; $('#zerog').setAttribute('aria-pressed',false); populate(); M.Composite.add(world, mc); play('chord'); };
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { populate(); M.Composite.add(world, mc); }, 250); });
+
+  function drawBody(b){
+    const p = b.plugin; g.save(); g.translate(b.position.x, b.position.y); g.rotate(b.angle);
+    const w=p.w, h=p.h;
+    g.fillStyle = '#000'; g.fillRect(-w/2+6, -h/2+6, w, h);
+    if(p.type==='img'){ const im = IMGS[p.k]; g.fillStyle=p.col; g.fillRect(-w/2,-h/2,w,h);
+      if(im.complete && im.naturalWidth){ const s = Math.max(w/im.naturalWidth, h/im.naturalHeight), iw=im.naturalWidth*s, ih=im.naturalHeight*s; g.save(); g.beginPath(); g.rect(-w/2,-h/2,w,h); g.clip(); g.drawImage(im,-iw/2,-ih/2,iw,ih); g.globalCompositeOperation='multiply'; g.globalAlpha=.35; g.fillStyle=p.col; g.fillRect(-w/2,-h/2,w,h); g.restore(); }
+      g.lineWidth=3; g.strokeStyle='#000'; g.strokeRect(-w/2,-h/2,w,h);
+    } else {
+      g.fillStyle = p.col; g.fillRect(-w/2,-h/2,w,h); g.lineWidth=3; g.strokeStyle='#000'; g.strokeRect(-w/2,-h/2,w,h);
+      const tc = darkText(p.col) ? '#000' : (p.col===COL.ink ? COL.paper : '#fff');
+      if(p.type==='letter'){ g.fillStyle=tc; g.font=`800 ${h*.92}px "Bricolage Grotesque", "Arial Narrow", sans-serif`; g.textAlign='center'; g.textBaseline='middle'; g.fillText(p.ch,0,h*.06); }
+      if(p.type==='tag'){ g.fillStyle=tc; g.font=`800 ${Math.min(h*.62, w*1.6/p.txt.length)}px "Bricolage Grotesque", sans-serif`; g.textAlign='center'; g.textBaseline='middle'; g.fillText(p.txt,0,h*.05); }
+      if(p.type==='seg'){ const s=w*.58/100; g.save(); g.translate(-w*.29,-h*.36); g.scale(s,s); g.fillStyle=tc; g.fill(P2D[p.k]); g.restore(); g.fillStyle=tc; g.font=`900 ${Math.max(11,w*.11)}px Satoshi, sans-serif`; g.textAlign='center'; g.fillText(SEGLBL[p.k],0,h*.4); }
+    }
+    g.restore();
+  }
+  let last = performance.now();
+  (function loop(now){
+    requestAnimationFrame(loop);
+    if(!hubActive) { last = now; return; }
+    const dt = Math.min(33, now-last); last = now;
+    M.Engine.update(engine, dt);
+    g.setTransform(DPR,0,0,DPR,0,0); g.clearRect(0,0,W,H);
+    g.strokeStyle='rgba(0,0,0,.07)'; g.lineWidth=1; for(let x=0;x<W;x+=40){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,H); g.stroke(); } for(let y=0;y<H;y+=40){ g.beginPath(); g.moveTo(0,y); g.lineTo(W,y); g.stroke(); }
+    hubBodies.forEach(drawBody);
+  })(last);
+}
+
+/* ---------------- striscia foto con skew ---------------- */
+let sy = scrollY, skew = 0, sx = 0;
+(function stripLoop(){ const v = scrollY - sy; sy = scrollY; skew += (Math.max(-20,Math.min(20,v*.6)) - skew)*.12; sx -= 1 + Math.abs(v)*.4; const tr = $('#strip'); const half = tr.scrollWidth/2; if(-sx > half) sx += half; if(!reduce) tr.style.transform = `translateX(${sx}px) skewX(${-skew}deg)`; requestAnimationFrame(stripLoop); })();
+
+/* ---------------- tilt ---------------- */
+if(hover && !reduce) $$('.tilt').forEach(el => { el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; el.style.transform=`perspective(800px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.03)`; el.style.zIndex=2; }); el.addEventListener('pointerleave', () => { el.style.transform=''; el.style.zIndex=''; }); });
+
+/* ---------------- MUSICA ---------------- */
+const PADS = [['Cassa','kick',COL.musica],['Rullante','snare',COL.arte],['Charleston','hat',COL.cinema],['Battimani','clap',COL.architettura],['Basso','bass',COL.artigianato],['Accordo','chord',COL.festival],['Laser','laser',COL.cinema],['Sirena','siren',COL.arte]];
+let hits = 0;
+$('#pads').innerHTML = PADS.map((p,i) => `<button class="pad" type="button" data-i="${i}" style="--hc:${p[2]}"><kbd>${i+1}</kbd><b>${p[0]}</b></button>`).join('');
+function hit(i){
+  const p = PADS[i], el = $(`.pad[data-i="${i}"]`); if(!el) return;
+  if(soundOn) { try{ SND[p[1]](); }catch(e){} }
+  el.classList.add('hit'); setTimeout(()=>el.classList.remove('hit'), 110);
+  const r = el.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, 14);
+  $$('#musicPics figure').forEach(f => { f.classList.remove('beat'); void f.offsetWidth; f.classList.add('beat'); });
+  hits++; $('#hits').textContent = hits + (hits===1?' colpo':' colpi');
+}
+$('#pads').addEventListener('pointerdown', e => { const b = e.target.closest('.pad'); if(b){ e.preventDefault(); hit(+b.dataset.i); } });
+$('#pads').addEventListener('keydown', e => { if((e.key==='Enter'||e.key===' ') && e.target.closest('.pad')){ e.preventDefault(); hit(+e.target.closest('.pad').dataset.i); } });
+addEventListener('keydown', e => { if(cur==='musica' && /^[1-8]$/.test(e.key)) hit(+e.key-1); });
+let loopT = null, step = 0;
+$('#loop').onclick = e => {
+  if(loopT){ clearInterval(loopT); loopT=null; e.currentTarget.textContent='Avvia il beat'; return; }
+  ac(); e.currentTarget.textContent='Ferma il beat';
+  loopT = setInterval(() => { if(cur!=='musica'){ return; } const s = step%16; if(s%4===0) hit(0); if(s%8===4) hit(1); if(s%2===1) hit(2); if(s===14) hit(4); step++; }, 125);
+};
+
+/* ---------------- CINEMA ---------------- */
+(() => {
+  const pj = $('#projector'), dk = pj.querySelector('.dark');
+  const n = document.createElement('canvas'); n.width = n.height = 160; const ng = n.getContext('2d'), id = ng.createImageData(160,160);
+  for(let i=0;i<id.data.length;i+=4){ const v = Math.random()*255; id.data[i]=id.data[i+1]=id.data[i+2]=v; id.data[i+3]=255; } ng.putImageData(id,0,0);
+  $('#grain').style.background = `url(${n.toDataURL()})`;
+  let tx=50, ty=50, x=50, y=50, rad = 150;
+  pj.addEventListener('pointermove', e => { const r = pj.getBoundingClientRect(); tx = (e.clientX-r.left)/r.width*100; ty = (e.clientY-r.top)/r.height*100; });
+  let steered = false;
+  pj.addEventListener('pointerdown', e => { if(e.pointerType !== 'mouse'){ const r = pj.getBoundingClientRect(); tx = (e.clientX-r.left)/r.width*100; ty = (e.clientY-r.top)/r.height*100; steered = true; } rad = 320; play('blip', 140); });
+  pj.addEventListener('pointerup', () => rad = 150);
+  let t = 0;
+  (function l(){ t+=.05; if(cur==='cinema'){ x += (tx-x)*.15; y += (ty-y)*.15; if(!hover && !reduce && !steered){ tx = 50+30*Math.sin(t*.7); ty = 50+22*Math.cos(t*.9); } const fl = reduce?0:Math.sin(t*7)*6+Math.random()*6; dk.style.setProperty('--x', x+'%'); dk.style.setProperty('--y', y+'%'); dk.style.setProperty('--r', (rad+fl)+'px'); } requestAnimationFrame(l); })();
+  $$('[data-film]').forEach(b => b.onclick = () => { const im = $('#filmImg'); im.src = `img/${b.dataset.film}.jpg`; im.alt = b.dataset.film==='cinema-schermo' ? "Uno schermo all'aperto con un primo piano di due donne" : 'Spettatori seduti al buio durante una proiezione'; play('blip', 200); });
+})();
+
+/* ---------------- ARTE: generatore di segni ---------------- */
+let paintReady = false;
+function initPaint(){
+  if(paintReady) return; paintReady = true;
+  const cv = $('#paint'), g = cv.getContext('2d'); let W = 0, H = 0, n = 0, sym = false, grid = false, bgI = 0, ki = 0, ci = 0;
+  const KS = ['arte','artigianato','architettura','cinema','musica','festival'];
+  const BGS = [{t:'carta', c:COL.paper, pal:[COL.ink,COL.arte,COL.cinema,COL.musica,COL.architettura,COL.artigianato]},
+               {t:'notte', c:COL.ink, pal:[COL.festival,COL.arte,COL.artigianato,COL.paper,COL.cinema,COL.architettura]},
+               {t:'foto', c:'#000', img:'img/arte-installazione-1.jpg', pal:[COL.festival,COL.paper,COL.arte,COL.artigianato,COL.cinema,COL.festival]}];
+  const bgImg = new Image(); bgImg.src = BGS[2].img; bgImg.onload = () => { if(bgI===2) fresh(); };
+  function bg(){
+    const b = BGS[bgI]; g.fillStyle = b.c; g.fillRect(0,0,W,H);
+    if(b.img && bgImg.complete && bgImg.naturalWidth){ const s2 = Math.max(W/bgImg.naturalWidth, H/bgImg.naturalHeight); const iw = bgImg.naturalWidth*s2, ih = bgImg.naturalHeight*s2; g.drawImage(bgImg,(W-iw)/2,(H-ih)/2,iw,ih); g.fillStyle='rgba(0,0,0,.45)'; g.fillRect(0,0,W,H); }
+  }
+  function ico(k,x,y,sz,a,c){
+    const vb = k==='festival' ? {x:-7,y:-40,w:281} : {x:0,y:0,w:100};
+    g.save(); g.translate(x,y); g.rotate(a); const sc = sz/vb.w; g.scale(sc,sc); g.translate(-vb.x-vb.w/2, -vb.y-vb.w/2); g.fillStyle = c; g.fill(P2D[k]); g.restore();
+  }
+  function stamp(x,y,sz,a){
+    if(grid){ const q = 48; x = Math.round(x/q)*q; y = Math.round(y/q)*q; a = Math.round(a/(Math.PI/2))*(Math.PI/2); sz = Math.min(sz, 44); }
+    const k = KS[ki++ % KS.length], c = BGS[bgI].pal[ci++ % 6];
+    const pts = sym ? [[x,y,a],[W-x,y,-a],[x,H-y,-a],[W-x,H-y,a]] : [[x,y,a]];
+    pts.forEach(p => ico(k,p[0],p[1],sz,p[2],c));
+    n += pts.length; $('#gCount').textContent = n + ' segni';
+  }
+  function demo(){ for(let i=0;i<46;i++){ const t = i/45, r = Math.min(W,H)*(.08+t*.36), an = t*Math.PI*5.2; stamp(W/2+Math.cos(an)*r, H/2+Math.sin(an)*r, 22+t*58, an); } }
+  function fresh(){ n = 0; bg(); demo(); }
+  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W*DPR; cv.height = H*DPR; g.setTransform(DPR,0,0,DPR,0,0); fresh(); }
+  size();
+  let down = false, lx = 0, ly = 0, acc = 0;
+  cv.addEventListener('pointerdown', e => { down = true; cv.setPointerCapture(e.pointerId); const r = cv.getBoundingClientRect(); lx = e.clientX-r.left; ly = e.clientY-r.top; stamp(lx,ly,48,Math.random()*6); play('blip', 520); });
+  cv.addEventListener('pointermove', e => {
+    if(!down) return; const r = cv.getBoundingClientRect(), x = e.clientX-r.left, y = e.clientY-r.top, d = Math.hypot(x-lx,y-ly);
+    acc += d; if(acc < 18){ return; } acc = 0;
+    stamp(x, y, Math.max(18, Math.min(150, 16 + d*2.2)), Math.atan2(y-ly, x-lx)); lx = x; ly = y;
+    if(Math.random() < .25) play('blip', 400 + Math.random()*900);
+  });
+  ['pointerup','pointercancel'].forEach(ev => cv.addEventListener(ev, () => down = false));
+  /* tastiera: spazio o Invio aggiungono un segno in un punto a caso */
+  cv.addEventListener('keydown', e => { if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); stamp(30 + Math.random()*(W-60), 30 + Math.random()*(H-60), 30 + Math.random()*70, Math.random()*6.28); play('blip', 400 + Math.random()*900); } });
+  $('#gSym').onclick = e => { sym = !sym; e.currentTarget.setAttribute('aria-pressed', sym); play('blip', 700); };
+  $('#gGrid').onclick = e => { grid = !grid; e.currentTarget.setAttribute('aria-pressed', grid); play('blip', 600); };
+  $('#gBg').onclick = e => { bgI = (bgI+1) % BGS.length; e.currentTarget.textContent = 'Sfondo: ' + BGS[bgI].t; fresh(); play('chord'); };
+  $('#gClear').onclick = () => { n = 0; bg(); $('#gCount').textContent = '0 segni'; play('laser'); };
+  let shotFile = null, shotBlob = null, shotUrl = '';
+  /* download: nel visualizzatore di Claude passa dalla funzione "downloads"; sul sito vero usa un normale link */
+  const dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null);
+  $('#shotDl').onclick = async () => {
+    const d = await dlCap;
+    if(d){ try{ if(!shotBlob) shotBlob = await (await fetch(shotUrl)).blob(); await d.save({filename:'innovart-opera.png', data: shotBlob}); }catch(err){} return; }
+    const a = document.createElement('a'); a.href = shotUrl; a.download = 'innovart-opera.png'; document.body.appendChild(a); a.click(); a.remove();
+  };
+  $('#gSave').onclick = () => {
+    const url = cv.toDataURL('image/png'), sh = $('#shot'), shr = $('#shotShare');
+    $('#shotImg').src = url; shotUrl = url; shotBlob = null; shotFile = null; shr.hidden = true;
+    cv.toBlob(b => { if(!b) return; shotBlob = b; try{ const f = new File([b], 'innovart-opera.png', {type:'image/png'}); if(navigator.canShare && navigator.canShare({files:[f]})){ shotFile = f; shr.hidden = false; } }catch(err){} }, 'image/png');
+    sh.classList.add('show'); $('#shotClose').focus(); play('chime');
+  };
+  $('#shotShare').onclick = () => { if(shotFile) navigator.share({files:[shotFile], title:'La mia opera · Innovart'}).catch(() => {}); };
+  const shotOff = () => { $('#shot').classList.remove('show'); $('#gSave').focus(); };
+  $('#shotClose').onclick = shotOff;
+  $('#shot').addEventListener('click', e => { if(e.target.id === 'shot') shotOff(); });
+  $('#shot').addEventListener('keydown', e => { if(e.key === 'Escape') shotOff(); });
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if(Math.abs(cv.clientWidth - W) > 40) size(); }, 300); });
+}
+
+/* ---------------- ARCHITETTURA: tira su il padiglione (tocco, mouse, tastiera) ---------------- */
+let offReady = false, buildActive = false;
+function initBuild(){
+  if(offReady){ if(initBuild.wake) initBuild.wake(); return; } offReady = true;
+  const cv = $('#offcv'), g = cv.getContext('2d'), live = $('#oLive');
+  const C = 6, Rr = 4, N = C*Rr;                       // nodi: colonne x righe (riga 0 = terra)
+  const id = (r,c) => r*C + c, rc = i => [Math.floor(i/C), i%C];
+  const key = (a,b) => a < b ? a+'-'+b : b+'-'+a;
+  const adj = (a,b) => { const [r1,c1] = rc(a), [r2,c2] = rc(b); return a !== b && Math.abs(r1-r2) <= 1 && Math.abs(c1-c2) <= 1; };
+  let beams = new Set(), sel = -1, kb = id(1,1), kbOn = false, W = 0, H = 0, s = 60, ox = 0, gy = 0;
+  let sim = null, best = 0, firstFail = true;
+  const rest = i => { const [r,c] = rc(i); return [ox + c*s, gy - r*s]; };
+
+  function size(){
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR); g.setTransform(DPR,0,0,DPR,0,0);
+    s = Math.min((W - 60) / (C-1), (H - 110) / (Rr-1)); ox = (W - s*(C-1)) / 2; gy = H - 46; if(sim) stopSim(); kick();
+  }
+  const roof = () => { let n = 0; for(let c=0;c<C-1;c++) if(beams.has(key(id(Rr-1,c), id(Rr-1,c+1)))) n++; return n; };
+  function meter(){ $('#oMeter').textContent = `${beams.size} listelli · tetto ${Math.min(roof(),3)}/3`; }
+
+  function tap(i){
+    if(sim) return;
+    if(sel < 0){ sel = i; play('blip', 700); }
+    else if(i === sel){ sel = -1; play('blip', 300); }
+    else if(adj(sel, i)){ const k = key(sel, i); if(beams.has(k)){ beams.delete(k); play('blip', 220); live.textContent = 'Listello tolto.'; } else { beams.add(k); play('blip', 420 + beams.size*12); live.textContent = `Listello messo. ${beams.size} listelli.`; } sel = i; }
+    else { sel = i; play('blip', 700); }
+    if(!used){ used = true; $('#oHint').classList.add('off'); }
+    meter(); kick();
+  }
+  let used = false;
+
+  /* vento: simulazione a nodi incernierati (i rettangoli sono meccanismi, i triangoli no) */
+  function startSim(){
+    if(!beams.size){ toast('Metti qualche listello prima del vento.'); return; }
+    const P = [], O = [], fixed = [];
+    for(let i=0;i<N;i++){ const p = rest(i); P.push([...p]); O.push([...p]); fixed.push(rc(i)[0] === 0); }
+    const cons = [...beams].map(k => { const [a,b] = k.split('-').map(Number); const pa = rest(a), pb = rest(b); return {a, b, L: Math.hypot(pa[0]-pb[0], pa[1]-pb[1])}; });
+    const usedN = new Set(); cons.forEach(c => { usedN.add(c.a); usedN.add(c.b); });
+    sim = {P, O, fixed, cons, used:[...usedN], t:0, fell:false, done:false, tFell:0};
+    sel = -1; $('#oWind').textContent = 'Vento in corso…'; $('#oWind').disabled = true; play('siren'); kick();
+  }
+  function stopSim(){ sim = null; $('#oWind').textContent = 'Arriva il vento'; $('#oWind').disabled = false; kick(); }
+  function stepSim(){
+    const S = sim, k = s/70; S.t += 1/60;
+    const wind = (S.t < .6 ? 0 : Math.min(1, (S.t-.6)/1.6)) * (.16 + .06*Math.sin(S.t*9)) * k;
+    for(const i of S.used){ if(S.fixed[i]) continue; const p = S.P[i], o = S.O[i]; const vx = (p[0]-o[0])*.985, vy = (p[1]-o[1])*.985; o[0] = p[0]; o[1] = p[1]; p[0] += vx + wind; p[1] += vy + .22*k; }
+    for(let it=0; it<40; it++){
+      for(const c of S.cons){ const pa = S.P[c.a], pb = S.P[c.b], dx = pb[0]-pa[0], dy = pb[1]-pa[1], d = Math.hypot(dx,dy) || 1, diff = (d - c.L)/d;
+        const fa = S.fixed[c.a], fb = S.fixed[c.b]; if(fa && fb) continue;
+        const wa = fa ? 0 : (fb ? 1 : .5), wb = fb ? 0 : (fa ? 1 : .5);
+        pa[0] += dx*diff*wa; pa[1] += dy*diff*wa; pb[0] -= dx*diff*wb; pb[1] -= dy*diff*wb; }
+      for(const i of S.used){ const p = S.P[i]; if(p[1] > gy){ p[1] = gy; S.O[i][0] = p[0]; } }
+    }
+    let maxd = 0; for(const i of S.used){ const r0 = rest(i); maxd = Math.max(maxd, Math.hypot(S.P[i][0]-r0[0], S.P[i][1]-r0[1])); }
+    if(!S.fell && maxd > s*.3){ S.fell = true; S.tFell = S.t; play('snare'); }
+    if(!S.done && ((S.fell && S.t - S.tFell > 1.6) || S.t > 4.2)){ S.done = true; verdict(); }
+  }
+  function verdict(){
+    const n = beams.size, r = roof();
+    let msg;
+    if(sim.fell){ msg = firstFail ? 'Crollato! I rettangoli si piegano: prova ad aggiungere qualche diagonale.' : 'Crollato! Cerca il punto che si piega e chiudilo con un triangolo.'; firstFail = false; play('laser'); }
+    else if(r < 3){ msg = 'Sta in piedi, ma senza tetto non è un padiglione: servono almeno 3 listelli in cima.'; play('blip', 500); }
+    else { const rec = !best || n < best; if(rec) best = n; msg = `Sta in piedi con ${n} listelli!` + (rec ? ' Nuovo record: meno listelli usi, più è bravo il progetto.' : ` Record: ${best}.`); play('chime'); const b = cv.getBoundingClientRect(); burst(b.left + b.width/2, b.top + b.height*.3, 90); }
+    $('#oVerdict').textContent = msg; live.textContent = msg;
+    $('#oWind').textContent = 'Ricostruisci'; $('#oWind').disabled = false;
+  }
+
+  /* disegno */
+  function beamLine(x1,y1,x2,y2,col){ g.lineCap = 'round'; g.strokeStyle = '#3a2a1a'; g.lineWidth = Math.max(8, s*.17); g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke(); g.strokeStyle = col; g.lineWidth = Math.max(5, s*.12); g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke(); }
+  function draw(){
+    g.fillStyle = COL.paper; g.fillRect(0,0,W,H);
+    g.strokeStyle = 'rgba(0,0,0,.06)'; g.lineWidth = 1; for(let x=0;x<W;x+=30){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,gy); g.stroke(); } for(let y=gy;y>0;y-=30){ g.beginPath(); g.moveTo(0,y); g.lineTo(W,y); g.stroke(); }
+    /* selciato */
+    g.fillStyle = '#9b958c'; g.fillRect(0, gy, W, H-gy); g.fillStyle = '#b8b2a8'; for(let x=-10, k=0; x<W; x+=22, k++){ g.beginPath(); g.ellipse(x + (k%2)*8, gy+12 + (k%3)*9, 9, 6, 0, 0, Math.PI*2); g.fill(); }
+    const pos = i => sim ? sim.P[i] : rest(i);
+    /* vento */
+    if(sim && sim.t > .6 && !reduce){ g.strokeStyle = 'rgba(1,85,240,.35)'; g.lineWidth = 2; for(let k=0;k<14;k++){ const y = 20 + ((k*53) % (gy-30)), x = ((sim.t*420 + k*97) % (W+120)) - 120; g.beginPath(); g.moveTo(x, y); g.lineTo(x+70, y); g.stroke(); } }
+    /* telo sul tetto */
+    for(let c=0;c<C-1;c++){ const a = id(Rr-1,c), b = id(Rr-1,c+1); if(!beams.has(key(a,b))) continue; const pa = pos(a), pb = pos(b); g.fillStyle = 'rgba(201,162,122,.75)'; g.beginPath(); g.moveTo(pa[0], pa[1]); g.lineTo(pb[0], pb[1]); g.lineTo(pb[0], pb[1] + s*.55); g.quadraticCurveTo((pa[0]+pb[0])/2, (pa[1]+pb[1])/2 + s*.75, pa[0], pa[1] + s*.55); g.closePath(); g.fill(); }
+    /* listelli */
+    const fell = sim && sim.fell;
+    beams.forEach(k => { const [a,b] = k.split('-').map(Number); const pa = pos(a), pb = pos(b); beamLine(pa[0],pa[1],pb[0],pb[1], fell ? '#e08a6a' : '#E8C99A'); });
+    /* anteprima del listello */
+    if(!sim && sel >= 0 && hov){ const ps = rest(sel), h = nearest(hov[0], hov[1], s*.45); if(h >= 0 && adj(sel,h)){ const ph = rest(h); g.globalAlpha = .4; beamLine(ps[0],ps[1],ph[0],ph[1], beams.has(key(sel,h)) ? COL.architettura : '#E8C99A'); g.globalAlpha = 1; } }
+    /* nodi */
+    for(let i=0;i<N;i++){ const [x,y] = pos(i), r0 = rc(i)[0] === 0; if(sim && !sim.used.includes(i)) continue;
+      if(r0){ g.fillStyle = '#555'; g.fillRect(x-9, y-2, 18, 10); }
+      g.fillStyle = i === sel ? COL.architettura : '#222'; g.beginPath(); g.arc(x, y, i === sel ? 9 : 5.5, 0, Math.PI*2); g.fill();
+      if(i === sel){ g.strokeStyle = COL.architettura; g.lineWidth = 3; g.beginPath(); g.arc(x, y, 17, 0, Math.PI*2); g.stroke(); }
+      if(kbOn && i === kb && !sim){ g.strokeStyle = COL.festival; g.lineWidth = 3; g.strokeRect(x-14, y-14, 28, 28); } }
+    /* altezza del tetto */
+    if(!sim){ const ty = gy - (Rr-1)*s; g.setLineDash([6,6]); g.strokeStyle = 'rgba(255,68,18,.6)'; g.lineWidth = 2; g.beginPath(); g.moveTo(10, ty); g.lineTo(ox - 16, ty); g.moveTo(ox + (C-1)*s + 16, ty); g.lineTo(W-10, ty); g.stroke(); g.setLineDash([]); g.fillStyle = COL.architettura; g.font = '900 12px Satoshi, sans-serif'; g.textAlign = 'left'; g.fillText('TETTO', 10, ty - 6); }
+  }
+  let raf = 0;
+  function loop(){ raf = 0; if(!buildActive) return; if(sim && !sim.done) stepSim(); else if(sim && sim.done && sim.fell) stepSim(); draw(); if(sim && (!sim.done || sim.fell) && sim.t < 7) raf = requestAnimationFrame(loop); }
+  function kick(){ if(!raf) raf = requestAnimationFrame(loop); }
+  initBuild.wake = kick;
+
+  /* input: tocchi, niente trascinamento → la pagina scorre sempre */
+  let hov = null, down = null;
+  const pt = e => { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; };
+  function nearest(x, y, tol){ let b = -1, bd = tol; for(let i=0;i<N;i++){ const p = rest(i), d = Math.hypot(p[0]-x, p[1]-y); if(d < bd){ bd = d; b = i; } } return b; }
+  cv.addEventListener('pointerdown', e => { down = pt(e); kbOn = false; ac(); });
+  cv.addEventListener('pointerup', e => { if(!down) return; const p = pt(e), moved = Math.hypot(p[0]-down[0], p[1]-down[1]); down = null; if(moved > 12) return; const i = nearest(p[0], p[1], Math.max(28, s*.48)); if(i >= 0){ kb = i; tap(i); } else if(sel >= 0){ sel = -1; kick(); } });
+  cv.addEventListener('pointercancel', () => down = null);
+  cv.addEventListener('pointermove', e => { if(e.pointerType !== 'mouse') return; hov = pt(e); cv.style.cursor = nearest(hov[0], hov[1], s*.45) >= 0 ? 'pointer' : 'default'; kick(); });
+  cv.addEventListener('pointerleave', () => { hov = null; kick(); });
+  cv.addEventListener('focus', () => { kbOn = cv.matches(':focus-visible'); kick(); });
+  cv.addEventListener('blur', () => { kbOn = false; kick(); });
+  cv.addEventListener('keydown', e => {
+    const [r,c] = rc(kb);
+    if(e.key === 'ArrowLeft') kb = id(r, Math.max(0, c-1));
+    else if(e.key === 'ArrowRight') kb = id(r, Math.min(C-1, c+1));
+    else if(e.key === 'ArrowUp') kb = id(Math.min(Rr-1, r+1), c);
+    else if(e.key === 'ArrowDown') kb = id(Math.max(0, r-1), c);
+    else if(e.key === 'Enter' || e.key === ' ') tap(kb);
+    else if(e.key === 'v' || e.key === 'V') $('#oWind').click();
+    else if(e.key === 'Escape') sel = -1;
+    else return;
+    kbOn = true; e.preventDefault(); kick();
+  });
+
+  /* comandi */
+  $('#oWind').onclick = () => { if(sim){ stopSim(); $('#oVerdict').textContent = ''; return; } startSim(); };
+  $('#oUndo').onclick = () => { if(sim) stopSim(); const last = [...beams].pop(); if(last){ beams.delete(last); play('blip', 220); } meter(); kick(); };
+  $('#oClear').onclick = () => { if(sim) stopSim(); beams.clear(); sel = -1; $('#oVerdict').textContent = ''; meter(); play('laser'); kick(); };
+  $('#oExample').onclick = () => {
+    if(sim) stopSim(); beams.clear(); sel = -1;
+    const add = (r1,c1,r2,c2) => beams.add(key(id(r1,c1), id(r2,c2)));
+    [[1,2],[3,4]].forEach(([a,b]) => { for(let r=0;r<Rr-1;r++){ add(r,a,r+1,a); add(r,b,r+1,b); add(r, r%2 ? b : a, r+1, r%2 ? a : b); } for(let r=1;r<Rr;r++) add(r,a,r,b); });
+    add(Rr-1,2,Rr-1,3);
+    $('#oVerdict').textContent = 'Un esempio che regge: due torri controventate e una trave. Riesci a usare meno listelli?'; meter(); play('chord'); kick();
+  };
+
+  size(); meter();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 150); });
+  if(window.ResizeObserver) new ResizeObserver(() => { if(Math.abs(cv.clientWidth - W) > 2 || Math.abs(cv.clientHeight - H) > 2) size(); }).observe(cv);
+}
+
+/* ---------------- ARTIGIANATO: il tornio (tocco, mouse, tastiera) ---------------- */
+let latheReady = false, latheActive = false;
+function initLathe(){
+  if(latheReady){ if(initLathe.wake) initLathe.wake(); return; } latheReady = true;
+  const cv = $('#lathe'), g = cv.getContext('2d'), live = $('#tLive');
+  const N = 28;                                                    // anelli dal piede (0) al bordo (N-1)
+  const sm = f => Array.from({length:N}, (_,i) => f(i/(N-1)));
+  const ORD = [
+    {t:'Vaso',      f:y => .42 + .26*Math.sin(Math.PI*Math.min(1,y*1.15)) - .1*y},
+    {t:'Anfora',    f:y => y < .78 ? .3 + .48*Math.sin(Math.PI*y/.78)*.9 : .22 + (y-.78)*.9},
+    {t:'Ciotola',   f:y => .28 + .62*Math.sqrt(y)},
+    {t:'Bottiglia', f:y => y < .55 ? .55 + .05*Math.sin(y*5) : Math.max(.14, .55 - (y-.55)*2.2)},
+    {t:'Tazza',     f:y => .5 + .04*y},
+    {t:'Fiasca',    f:y => y < .7 ? .25 + .55*Math.sin(Math.PI*y/.7) : .14}
+  ].map(o => ({t:o.t, p:sm(o.f).map(v => Math.max(.1, Math.min(.95, v)))}));
+  const GL = [['Terracotta','#C46A3C'],['Lime',COL.festival],['Magenta',COL.arte],['Blu',COL.cinema],['Viola',COL.musica],['Giallo',COL.artigianato],['Nero',COL.ink],['Bianco',COL.paper]];
+  let R, oi = 0, glaze = GL[0][1], W = 0, H = 0, cx = 0, base = 0, top = 0, maxR = 0, spin = 0, touching = false, kbRow = Math.floor(N/2), kbOn = false;
+  let shelf = []; try{ shelf = JSON.parse(localStorage.getItem('innovart-tornio') || '[]'); }catch(e){}
+  const lump = () => sm(y => .32 - .04*Math.abs(y-.5));   // si parte da un cilindro stretto: ogni ordine va modellato
+  let work = 0;                                             // quanto hai lavorato l'argilla
+  R = lump();
+
+  /* smalti */
+  $('#tGlaze').innerHTML = GL.map((g2,i) => `<button type="button" style="--s:${g2[1]}" aria-label="Smalto ${g2[0]}" aria-pressed="${i===0}" data-i="${i}"></button>`).join('');
+  $('#tGlaze').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; glaze = GL[+b.dataset.i][1]; $$('#tGlaze button').forEach(x => x.setAttribute('aria-pressed', x===b)); play('blip', 500 + +b.dataset.i*50); kick(); });
+
+  function size(){
+    if(cv.clientWidth < 20 || cv.clientHeight < 60) return;
+    W = cv.clientWidth; H = cv.clientHeight; cv.width = Math.round(W*DPR); cv.height = Math.round(H*DPR); g.setTransform(DPR,0,0,DPR,0,0);
+    cx = W/2; base = H - Math.max(46, H*.13); top = Math.max(26, H*.08); maxR = Math.min(W*.42, (base-top)*.62); kick();
+  }
+  const rowY = i => base - i/(N-1)*(base-top);
+  const yRow = y => Math.max(0, Math.min(N-1, (base - y)/(base-top)*(N-1)));
+  function match(){ const t = ORD[oi].p; let e = 0; for(let i=0;i<N;i++) e += Math.abs(R[i]-t[i]); return Math.round(100*Math.exp(-e/N*6)); }
+  function meter(){ $('#tMeter').textContent = `Somiglianza ${match()}%`; }
+
+  /* modellare: la mano spinge o allarga l'argilla all'altezza toccata */
+  let hum = null;
+  function sculpt(x, y, k){
+    const row = yRow(y), want = Math.max(.1, Math.min(.98, Math.abs(x-cx)/maxR));
+    for(let i=0;i<N;i++){ const w = Math.exp(-((i-row)**2)/4.5) * k, d = (want - R[i]) * w; R[i] += d; work += Math.abs(d); }
+    for(let pass=0; pass<1; pass++) for(let i=1;i<N-1;i++) R[i] = R[i]*.8 + (R[i-1]+R[i+1])*.1;   // l'argilla resta morbida
+    if(hum){ try{ hum.o.frequency.setTargetAtTime(110 + want*260, AC.currentTime, .05); }catch(e){} }
+    meter(); kick();
+  }
+  function humOn(){ if(!soundOn || hum) return; try{ const a = ac(); if(!a) return; const o = a.createOscillator(), gg = a.createGain(), f = a.createBiquadFilter(); o.type = 'sawtooth'; o.frequency.value = 160; f.type = 'lowpass'; f.frequency.value = 500; gg.gain.value = .0001; gg.gain.setTargetAtTime(.05, a.currentTime, .05); o.connect(f).connect(gg).connect(a.destination); o.start(); hum = {o, gg}; }catch(e){} }
+  function humOff(){ if(!hum) return; const h = hum; hum = null; try{ h.gg.gain.setTargetAtTime(.0001, AC.currentTime, .05); h.o.stop(AC.currentTime + .3); }catch(e){} }
+
+  /* disegno */
+  function potPath(P, sx = 1){ g.beginPath(); g.moveTo(cx - P[0]*maxR*sx, rowY(0)); for(let i=0;i<N;i++) g.lineTo(cx - P[i]*maxR*sx, rowY(i)); for(let i=N-1;i>=0;i--) g.lineTo(cx + P[i]*maxR*sx, rowY(i)); g.closePath(); }
+  function draw(){
+    g.fillStyle = '#1a1410'; g.fillRect(0,0,W,H);
+    /* ruota */
+    g.fillStyle = '#3a2d24'; g.beginPath(); g.ellipse(cx, base+8, maxR*1.25, 16, 0, 0, Math.PI*2); g.fill();
+    g.fillStyle = '#5b4637'; g.beginPath(); g.ellipse(cx, base+2, maxR*1.2, 13, 0, 0, Math.PI*2); g.fill();
+    /* sagoma da ordinare */
+    /* pezzo */
+    const grd = g.createLinearGradient(cx-maxR, 0, cx+maxR, 0); grd.addColorStop(0,'rgba(0,0,0,.45)'); grd.addColorStop(.35,'rgba(255,255,255,.18)'); grd.addColorStop(.55,'rgba(255,255,255,0)'); grd.addColorStop(1,'rgba(0,0,0,.55)');
+    potPath(R); g.fillStyle = glaze; g.fill(); g.fillStyle = grd; g.fill();
+    /* righe del tornio che girano */
+    g.save(); potPath(R); g.clip(); g.strokeStyle = 'rgba(0,0,0,.18)'; g.lineWidth = 1.2;
+    for(let i=0;i<N;i+=2){ const y = rowY(i), r = R[i]*maxR; for(let k=0;k<3;k++){ const ph = (spin + k*2.1 + i*.4) % (Math.PI*2); if(Math.cos(ph) < 0) continue; const x = cx + Math.sin(ph)*r; g.beginPath(); g.moveTo(x, y-3); g.lineTo(x, y+3); g.stroke(); } }
+    g.restore();
+    /* bocca */
+    const rt = R[N-1]*maxR; g.fillStyle = 'rgba(0,0,0,.55)'; g.beginPath(); g.ellipse(cx, rowY(N-1), rt, Math.max(3, rt*.18), 0, 0, Math.PI*2); g.fill();
+    g.strokeStyle = 'rgba(0,0,0,.6)'; g.lineWidth = 2; potPath(R); g.stroke();
+    /* sagoma da ordinare, sopra il pezzo */
+    g.setLineDash([8,7]); g.strokeStyle = '#FFB600'; g.lineWidth = 2.5; potPath(ORD[oi].p); g.stroke(); g.setLineDash([]);
+    /* cursore tastiera */
+    if(kbOn){ const y = rowY(kbRow), r = R[kbRow]*maxR; g.strokeStyle = COL.festival; g.lineWidth = 3; g.beginPath(); g.moveTo(cx-r-18, y); g.lineTo(cx-r-4, y); g.moveTo(cx+r+4, y); g.lineTo(cx+r+18, y); g.stroke(); }
+  }
+  let raf = 0, still = 0;
+  function loop(){ raf = 0; if(!latheActive) return; spin += touching ? .22 : .08; draw(); if(!reduce && (touching || ++still < 240)) raf = requestAnimationFrame(loop); }
+  function kick(){ still = 0; if(!raf) raf = requestAnimationFrame(loop); }
+
+  /* input: trascinare in orizzontale modella; in verticale la pagina scorre (touch-action: pan-y) */
+  const pos = e => { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; };
+  /* col dito si modella solo se il gesto parte in orizzontale: se parte in verticale la pagina scorre e l'argilla non si tocca */
+  let down = false, pend = null;
+  function start(e, x, y){ down = true; pend = null; touching = true; kbOn = false; try{ cv.setPointerCapture(e.pointerId); }catch(err){} humOn(); sculpt(x, y, .25); }
+  cv.addEventListener('pointerdown', e => { const [x,y] = pos(e); if(e.pointerType === 'mouse') start(e, x, y); else pend = {x, y, id:e.pointerId}; });
+  cv.addEventListener('pointermove', e => {
+    const [x,y] = pos(e);
+    if(pend && e.pointerId === pend.id){ const dx = Math.abs(x-pend.x), dy = Math.abs(y-pend.y); if(dx > 8 && dx > dy*1.2) start(e, x, y); else if(dy > 10) pend = null; return; }
+    if(!down) return; sculpt(x, y, .3);
+  });
+  cv.addEventListener('pointerup', () => { pend = null; }); cv.addEventListener('pointercancel', () => { pend = null; });
+  const up = () => { if(!down) return; down = false; touching = false; humOff(); live.textContent = `${ORD[oi].t}: somiglianza ${match()} per cento`; kick(); };
+  cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('lostpointercapture', up);
+  cv.addEventListener('focus', () => { kbOn = cv.matches(':focus-visible'); kick(); });
+  cv.addEventListener('blur', () => { kbOn = false; kick(); });
+  cv.addEventListener('keydown', e => {
+    if(e.key === 'ArrowUp') kbRow = Math.min(N-1, kbRow+1);
+    else if(e.key === 'ArrowDown') kbRow = Math.max(0, kbRow-1);
+    else if(e.key === 'ArrowLeft' || e.key === 'ArrowRight'){ const d = e.key === 'ArrowRight' ? .06 : -.06; sculpt(cx + (R[kbRow]+d)*maxR, rowY(kbRow), .9); play('blip', 200 + R[kbRow]*500); live.textContent = `Anello ${kbRow+1}: somiglianza ${match()} per cento`; }
+    else if(e.key === 'Enter'){ fire(); }
+    else return;
+    kbOn = true; e.preventDefault(); kick();
+  });
+
+  /* comandi */
+  function newOrder(){ oi = (oi + 1 + Math.floor(Math.random()*(ORD.length-1))) % ORD.length; $('#tOrder').textContent = ORD[oi].t; meter(); play('blip', 700); kick(); live.textContent = 'Nuovo ordine: ' + ORD[oi].t; }
+  function renderShelf(){
+    const el = $('#tShelf');
+    el.innerHTML = shelf.length ? shelf.map(p => `<figure><svg viewBox="-1.05 -0.05 2.1 1.1" aria-hidden="true"><path d="${svgPot(p.r)}" fill="${p.c}" stroke="#000" stroke-width=".03"/></svg><figcaption>${p.t} · ${p.s}%</figcaption></figure>`).join('') : '<p>Il banco è vuoto: cuoci il primo pezzo.</p>';
+  }
+  function svgPot(r){ const n = r.length, y = i => (1 - i/(n-1)).toFixed(3); let d = `M${(-r[0]/100).toFixed(3)} 1`; for(let i=0;i<n;i++) d += `L${(-r[i]/100).toFixed(3)} ${y(i)}`; for(let i=n-1;i>=0;i--) d += `L${(r[i]/100).toFixed(3)} ${y(i)}`; return d + 'Z'; }
+  function fire(){
+    if(work < 1.5){ toast('Prima modella l\'argilla: trascina di lato sul pezzo.'); live.textContent = 'Prima modella l\'argilla.'; play('blip', 180); return; }
+    const s = match(), msg = s >= 85 ? 'Perfetto, venduto subito!' : s >= 65 ? 'Bel pezzo, lo prende.' : s >= 40 ? 'Un po’ storto, ma ha carattere.' : 'Pezzo unico. Molto unico.';
+    shelf.unshift({t:ORD[oi].t, s, c:glaze, r:R.map(v => Math.round(v*100))}); shelf = shelf.slice(0, 6);
+    try{ localStorage.setItem('innovart-tornio', JSON.stringify(shelf)); }catch(e){}
+    renderShelf(); toast(`${ORD[oi].t} cotto: ${s}%. ${msg}`); live.textContent = `Cotto. Somiglianza ${s} per cento. ${msg}`;
+    const r = cv.getBoundingClientRect(); burst(r.left + r.width/2, r.top + r.height*.4, s >= 65 ? 90 : 30); play(s >= 65 ? 'chime' : 'blip', 300);
+    R = lump(); work = 0; newOrder();
+  }
+  $('#tNew').onclick = newOrder;
+  $('#tReset').onclick = () => { R = lump(); work = 0; meter(); play('laser'); kick(); };
+  $('#tFire').onclick = fire;
+  $('#tOrder').textContent = ORD[oi].t;
+
+  size(); meter(); renderShelf();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 150); });
+  if(window.ResizeObserver) new ResizeObserver(() => { if(Math.abs(cv.clientWidth - W) > 2 || Math.abs(cv.clientHeight - H) > 2) size(); }).observe(cv);
+  initLathe.wake = kick;
+}
+
+/* ---------------- PROGRAMMA ---------------- */
+const DAYS = [
+  ['23','Venerdì',[['architettura','Pomeriggio','Inaugurazione padiglioni OFF'],['arte','Pomeriggio','Apertura installazioni'],['artigianato','Pomeriggio','Apertura mercato artigiano'],['cinema','Sera','Proiezioni in concorso, prima serata'],['musica','Notte','Concerto in Piazza Marconi · da annunciare']]],
+  ['24','Sabato',[['artigianato','Mattina','Laboratorio di ceramica per bambini'],['artigianato','Tutto il giorno','Mercato degli artigiani'],['arte','Pomeriggio','Visite alle installazioni con gli artisti'],['cinema','Sera','Proiezioni in concorso, seconda serata'],['musica','Notte','Live e DJ set · line-up da annunciare']]],
+  ['25','Domenica',[['architettura','Mattina','Talk con i progettisti OFF'],['artigianato','Pomeriggio','Laboratorio di ceramica per adulti'],['cinema','Sera','Premiazione Film Festival'],['musica','Notte','Serata di chiusura · da annunciare']]]
+];
+$('#days').innerHTML = DAYS.map(d => `<div class="day tilt"><div class="day-h"><b class="disp">${d[0]}</b><span>${d[1]}</span></div>${d[2].map(s=>`<div class="slot" data-c="${s[0]}" style="--c:${COL[s[0]]}"><div><small>${s[1]}</small><strong>${s[2]}</strong></div></div>`).join('')}</div>`).join('');
+const CH = [['all','Tutto',COL.festival],['arte','Arte',COL.arte],['artigianato','Artigianato',COL.artigianato],['architettura','Architettura',COL.architettura],['cinema','Cinema',COL.cinema],['musica','Musica',COL.musica]];
+$('#chips').innerHTML = CH.map((c,i)=>`<button class="btn light" type="button" data-f="${c[0]}" aria-pressed="${i===0}" style="--cc:${c[2]}">${c[1]}</button>`).join('');
+$('#chips').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return; $$('#chips button').forEach(x => x.setAttribute('aria-pressed', x===b)); $$('#days .slot').forEach(s => s.classList.toggle('dim', b.dataset.f!=='all' && s.dataset.c!==b.dataset.f)); play('blip', 600); });
+if(hover && !reduce) $$('#days .tilt').forEach(el => { el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; el.style.transform=`rotateY(${x*12}deg) rotateX(${-y*12}deg)`; }); el.addEventListener('pointerleave', () => el.style.transform=''); });
+
+/* ---------------- caccia ai segni ---------------- */
+const KEYS = ['arte','artigianato','architettura','cinema','musica'];
+let got = []; try{ got = JSON.parse(localStorage.getItem('innovart-segni')||'[]'); }catch(e){}
+$('#hud').insertAdjacentHTML('beforeend', KEYS.map(k=>`<i data-k="${k}" style="--c:${COL[k]}" title="${SEGNAME[k]}"></i>`).join(''));
+function renderHud(){ $$('#hud i').forEach(i => i.classList.toggle('got', got.includes(i.dataset.k))); $('#hudN').textContent = got.length + '/5 segni'; $$('.seg').forEach(s => s.classList.toggle('got', got.includes(s.dataset.seg))); }
+$$('.seg').forEach(s => { s.style.setProperty('--c', COL[s.dataset.seg]); s.innerHTML = svgIco(s.dataset.seg); s.addEventListener('click', e => {
+  const k = s.dataset.seg; if(got.includes(k)) return; got.push(k); try{ localStorage.setItem('innovart-segni', JSON.stringify(got)); }catch(err){}
+  const r = s.getBoundingClientRect(); burst(r.left+23, r.top+23, 90); play('chime'); renderHud();
+  if(got.length === 5) setTimeout(openPass, 700); else toast(`Segno trovato: ${SEGNAME[k]}. Ne mancano ${5-got.length}.`);
+}); });
+$('#passIcons').innerHTML = KEYS.map(k=>`<i style="--c:${COL[k]};--tc:${darkText(COL[k])?'#000':'#fff'}">${svgIco(k)}</i>`).join('');
+function openPass(){ $('#pass').classList.add('show'); $('#passClose').focus(); burst(innerWidth/2, innerHeight/2, 160); play('chime'); }
+$('#passClose').onclick = () => $('#pass').classList.remove('show');
+addEventListener('keydown', e => { if(e.key==='Escape'){ $('#pass').classList.remove('show'); $('#shot').classList.remove('show'); } });
+renderHud();
+
+/* privacy: cancella i dati dei giochi */
+$('#wipe').onclick = () => { try{ localStorage.removeItem('innovart-segni'); localStorage.removeItem('innovart-tornio'); }catch(e){} got = []; renderHud(); toast('Dati dei giochi cancellati da questo browser.'); };
+
+/* cambio lingua: resta nella stessa stanza */
+$('#lang').addEventListener('click', e => { e.currentTarget.href = e.currentTarget.getAttribute('href').split('#')[0] + location.hash; });
+
+/* primo tocco: sblocca l'audio */
+addEventListener('pointerdown', () => { if(soundOn) ac(); }, {once:true});
+
+route();
+})();
+</script>
+</body>
+</html>
